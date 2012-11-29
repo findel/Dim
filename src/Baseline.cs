@@ -53,7 +53,7 @@ namespace Dim
 				}
 			}
 
-			DimConsole.WriteLine("Baseline created. Now you can share this with others.");
+			DimConsole.WriteLine("Baseline created. Now you can share this with others.", baselineFile);
 		}
 		
 		private void Restore(string baselineFile)

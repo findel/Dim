@@ -28,8 +28,9 @@ namespace Dim
 			if(!base.DryRun)
 				File.Create(Settings.UpdatesDir + @"\" + fileName);
 			
-			DimConsole.WriteLine("A new file has been created for you to use. Don't edit after you have shared it with others.");
-			DimConsole.WriteLine("New file: " + fileName);
+			DimConsole.WriteLine("A new file has been created for you to use. " +
+			                     "Don't edit after you have shared it with others.",
+			                    fileName);
 			
 			return 0;
 		}

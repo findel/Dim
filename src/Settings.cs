@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 
 namespace Dim
@@ -8,7 +9,10 @@ namespace Dim
 		
 		internal static string MySqlBinPath
 		{
-			get { return @"C:\Program Files\MySQL\MySQL Server 5.5\bin"; }
+			get
+			{
+				return @"C:\Program Files\MySQL\MySQL Server 5.5\bin";
+			}
 		}
 		
 		internal static string MySqlUserName

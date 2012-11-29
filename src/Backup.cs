@@ -40,7 +40,7 @@ namespace Dim
 				}
 			}
 			
-			DimConsole.WriteLine("Backup completed: " + filePath);
+			DimConsole.WriteLine("Backup completed:",  filePath);
 		}
 		
 	}
