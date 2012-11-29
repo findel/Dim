@@ -27,47 +27,59 @@ namespace Dim
 			
 			if(this.IsCreate)
 			{
-				DimConsole.WriteLine("Creating a new baseline script.");
-				
-				if(!this.DryRun)
-				{
-					using(var db = new DatabaseCommander())
-					{
-						db.Dump(baselineFile);
-					}
-				}
-				
-				DimConsole.WriteLine("Baseline created. Now you can share this with others.");
+				Create(baselineFile);
 			}
 			else if(this.IsRestore)
 			{
-				DimConsole.WriteLine("Restoring the current baseline.");
-				if(File.Exists(baselineFile))
-				{
-					DimConsole.WriteLine("Backing up existing database first.");
-					Backup.CreateBackup(base.DryRun);
-					
-					if(!base.DryRun)
-					{
-						using(var db = new DatabaseCommander())
-						{
-							db.RunFile(baselineFile);
-						}
-					}
-					
-					DimConsole.WriteLine("Baseline restored!");
-					
-				}
-				else
-				{
-					DimConsole.WriteLine("baseline.sql file does not exist.");
-				}
+				Restore(baselineFile);
 			}
 			else
 			{
 				throw new ManyConsole.ConsoleHelpAsException("Neither \"create\" or \"restore\" was chosen");
 			}
+			
 			return 0;
 		}
+		
+		private void Create(string baselineFile)
+		{
+			DimConsole.WriteIntro("Creating a new baseline script.");
+
+			if(!this.DryRun)
+			{
+				using(var db = new DatabaseCommander())
+				{
+					db.Dump(baselineFile);
+				}
+			}
+
+			DimConsole.WriteLine("Baseline created. Now you can share this with others.");
+		}
+		
+		private void Restore(string baselineFile)
+		{
+			DimConsole.WriteIntro("Restoring the current baseline.");
+			if(File.Exists(baselineFile))
+			{
+				DimConsole.WriteLine("Backing up existing database first.");
+				Backup.CreateBackup(base.DryRun);
+
+				if(!base.DryRun)
+				{
+					using(var db = new DatabaseCommander())
+					{
+						db.RunFile(baselineFile);
+					}
+				}
+
+				DimConsole.WriteLine("Baseline restored!");
+
+			}
+			else
+			{
+				DimConsole.WriteLine("baseline.sql file does not exist.");
+			}
+		}
+		
 	}
 }
