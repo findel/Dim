@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backup.cs" />
+    <Compile Include="Baseline.cs" />
     <Compile Include="DatabaseCommander.cs" />
     <Compile Include="DimCommand.cs" />
     <Compile Include="DimConsole.cs" />
