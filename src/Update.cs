@@ -1,93 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using ManyConsole;
 
 namespace Dim
 {
-	public class Update : ConsoleCommand
+	public class Update : DimCommand
 	{
 		public Update()
 		{
 			base.IsCommand("update", "Update your database with any changed shared by others.");
 		}
 		
-		public static string UpdateDirectory
-		{
-			get
-			{
-				return System.Environment.CurrentDirectory + @"\dim-updates";
-			}
-		}
-		
 		public override int Run(string[] remainingArguments)
 		{
-			#region Mock Output
 			
-//			Console.WriteLine("# 2 migrations scripts found.");
-//			Console.WriteLine("#\t'2012110-00000001-new-comments.sql'");
-//			Console.WriteLine("#\t'2012110-00000002-change-entries.sql'");
-//			Console.WriteLine("#\t");
-//			Thread.Sleep(1000);
-//			Console.WriteLine("#\tBacking up existing database (local dump).");
-//			Thread.Sleep(1000);
-//			Thread.Sleep(1000);
-//			Thread.Sleep(1000);
-//			Console.WriteLine("#\tRunning '2012110-00000001-new-comments.sql'");
-//			Thread.Sleep(1000);
-//			Thread.Sleep(1000);
-//			Thread.Sleep(1000);
-//			Console.WriteLine("#\tRunning '2012110-00000002-change-entries.sql'");
-//			Thread.Sleep(1000);
-//			Thread.Sleep(1000);
-//			Thread.Sleep(1000);
-//			Console.WriteLine("#\t");
-//			Console.WriteLine("#\tUpdate Completed!");
-//			Console.WriteLine("#\t");
+			DimConsole.WriteIntro("Checking for scripts to update the database");
 			
-			#endregion
+			var filesToUse = (from f in Directory.GetFiles(Settings.UpdatesDir)
+			                  where Path.GetExtension(f).ToLower() == ".sql"
+			                  && !File.Exists(Settings.LocalUpdatesDir + @"\" + Path.GetFileName(f))
+			                  select f).ToList();
 			
-			if(Directory.Exists(Update.UpdateDirectory))
+			if(filesToUse.Count > 0)
 			{
-				var files = Directory.GetFiles(Update.UpdateDirectory);
+				// Display count of files found.
+				DimConsole.WriteLine(string.Format("{0} script{1} found.",
+				                                   filesToUse.Count,
+				                                   (filesToUse.Count > 0 ? "s" : "")));
 				
-				var toExecute = new List<string>();
-				
-				foreach(var file in files)
+				// Display names of files found.
+				for(int i = 0, l = filesToUse.Count; i < l; i++)
 				{
-					var fileName = Path.GetFileName(file);
-					var executedPath = Init.DimExecutedUpdatesDir + @"\" + fileName;
-					if(!File.Exists(executedPath))
-						toExecute.Add(file);
+					int count = i + 1;
+					var fileName = Path.GetFileName(filesToUse[i]);
+					DimConsole.WriteLine(string.Format("{0}. \"{1}\"", count, fileName));
 				}
 				
-				if(toExecute.Count > 0)
+				// Backup before running anything (use for rollback)
+				DimConsole.WriteLine("Backing up database (local backup)");
+				Backup.CreateBackup(base.DryRun);
+				
+				foreach(var filePath in filesToUse)
 				{
-					Console.WriteLine("# " + toExecute.Count.ToString() + " migrations scripts found.");
-					foreach(var file in toExecute)
-					{
-						var fileName = Path.GetFileName(file);
-							Console.WriteLine("#\t " + fileName);
-					}
+					var fileName = Path.GetFileName(filePath);
 					
-					foreach(var file in toExecute)
-					{
-						var fileName = Path.GetFileName(file);
-						var executedPath = Init.DimExecutedUpdatesDir + @"\" + fileName;
-						Console.WriteLine("#\tRunning '" + fileName + "'");
-						File.Copy(file, executedPath);
-						Console.WriteLine("#\tExecuted '" + fileName + "'");
-					}
+					DimConsole.WriteLine("Running: \"" + fileName + "\"");
 					
+					// Execute mysql
+					if(!base.DryRun)
+					{
+						using(var db = new DatabaseCommander())
+						{
+							db.RunFile(filePath);
+						}
+						File.Copy(filePath, Settings.LocalUpdatesDir + "\\" + fileName);
+					}
+					DimConsole.WriteLine("Finished.");
 				}
-				else
-				{
-					Console.WriteLine("# No migration files found.");
-				}
+				DimConsole.WriteLine("Update Completed.");
 			}
+			else
+			{
+				DimConsole.WriteLine("No migration files found.");
+			}
+			
 			
 			return 0;
 		}
+
+
 	}
 }

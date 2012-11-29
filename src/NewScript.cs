@@ -4,7 +4,7 @@ using ManyConsole;
 
 namespace Dim
 {
-	public class NewScript : ConsoleCommand
+	public class NewScript : DimCommand
 	{
 		public NewScript()
 		{
@@ -16,18 +16,20 @@ namespace Dim
 		
 		public override int Run(string[] remainingArguments)
 		{
+			DimConsole.WriteIntro("Creating a new file");
 			var universalNow = DateTime.Now.ToUniversalTime();
 			
 			var fileName = "{0}-{1}.sql";
 			if(!string.IsNullOrEmpty(this.Desc))
 				fileName = "{0}-{1}-{2}.sql";
 			
-			fileName = string.Format(fileName, universalNow.ToString("yyyymmdd"), universalNow.Ticks.ToString(), this.Desc);
+			fileName = string.Format(fileName, universalNow.ToString("yyyyMMdd"), universalNow.Ticks.ToString(), this.Desc);
 			
-			File.Create(Update.UpdateDirectory + @"\" + fileName);
+			if(!base.DryRun)
+				File.Create(Settings.UpdatesDir + @"\" + fileName);
 			
-			Console.WriteLine("# New file created for you to use. Don't edit this after you have shared it with others.");
-			Console.WriteLine("#\t New file: " + fileName);
+			DimConsole.WriteLine("A new file has been created for you to use. Don't edit after you have shared it with others.");
+			DimConsole.WriteLine("New file: " + fileName);
 			
 			return 0;
 		}

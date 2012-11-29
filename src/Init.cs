@@ -5,56 +5,37 @@ using ManyConsole;
 
 namespace Dim
 {
-	public class Init : ConsoleCommand
+	public class Init : DimCommand
 	{
 		public Init()
 		{
 			base.IsCommand("init", "Initialise a new Dim project");
 		}
 		
-		internal static string DimDirectory
-		{
-			get
-			{
-				return System.Environment.CurrentDirectory + @"\.dim";
-			}
-		}
-		
-		internal static string DimExecutedUpdatesDir
-		{
-			get
-			{
-				var executedUpdatesDir = DimDirectory + @"\dim-updates";
-				return executedUpdatesDir;
-			}
-		}
-		
 		public override int Run(string[] remainingArguments)
 		{
-			Console.WriteLine("# Initialising a new Dim project.");
-			Console.WriteLine("#\t");
+			DimConsole.WriteIntro("Initialising a new Dim project.");
 			
-			if(!Directory.Exists(DimDirectory))
-			{
-				var directory = Directory.CreateDirectory(DimDirectory);
-				directory.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-				Directory.CreateDirectory(DimExecutedUpdatesDir);
-				Console.WriteLine("#\tNew .dim directory created: " + DimDirectory);
-			}
-			else 
-				Console.WriteLine("#\t.dim directory already exists: " + DimDirectory);
+//			if(!Directory.Exists(DimDirectory))
+//			{
+//				var directory = Directory.CreateDirectory(DimDirectory);
+//				directory.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+//				Directory.CreateDirectory(DimExecutedUpdatesDir);
+//				Console.WriteLine("#\tNew .dim directory created: " + DimDirectory);
+//			}
+//			else 
+//				Console.WriteLine("#\t.dim directory already exists: " + DimDirectory);
+//			
+//			if(!Directory.Exists(Settings.UpdatesDir))
+//			{
+//				Directory.CreateDirectory(Settings.UpdatesDir);
+//				Console.WriteLine("#\tNew dim-updates directory created: " + Settings.UpdatesDir);
+//			}
+//			else 
+//				Console.WriteLine("#\tThe dim-updates directory already exists: " + Settings.UpdatesDir);
 			
-			if(!Directory.Exists(Update.UpdateDirectory))
-			{
-				Directory.CreateDirectory(Update.UpdateDirectory);
-				Console.WriteLine("#\tNew dim-updates directory created: " + Update.UpdateDirectory);
-			}
-			else 
-				Console.WriteLine("#\tThe dim-updates directory already exists: " + Update.UpdateDirectory);
+			DimConsole.WriteLine("New project initialised!");
 			
-			Console.WriteLine("#\t");
-			Console.WriteLine("#\tNew project initialised!");
-			Console.WriteLine("#\t");
 			return 0;
 		}
 	}
