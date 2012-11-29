@@ -17,6 +17,7 @@ namespace Dim
 			DimConsole.WriteIntro("Initialising a new Dim project.");
 			
 			var loadDimDir = Settings.DimDirectory;
+			DimConsole.WriteLine("Tell your version control software to ignore the .dim directory.");
 			var loadLocalBackup = Settings.LocalBackupsDir;
 			var loadLocalUpdate = Settings.LocalUpdatesDir;
 			var loadUpdates = Settings.UpdatesDir;
