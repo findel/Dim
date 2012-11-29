@@ -12,7 +12,7 @@ namespace Dim
 	{
 		public Update()
 		{
-			base.IsCommand("update", "Update your database with any changed shared by others.");
+			base.IsCommand("update", "Update your database with any changes shared by others");
 		}
 		
 		public override int Run(string[] remainingArguments)

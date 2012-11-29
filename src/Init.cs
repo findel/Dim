@@ -16,23 +16,12 @@ namespace Dim
 		{
 			DimConsole.WriteIntro("Initialising a new Dim project.");
 			
-//			if(!Directory.Exists(DimDirectory))
-//			{
-//				var directory = Directory.CreateDirectory(DimDirectory);
-//				directory.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-//				Directory.CreateDirectory(DimExecutedUpdatesDir);
-//				Console.WriteLine("#\tNew .dim directory created: " + DimDirectory);
-//			}
-//			else 
-//				Console.WriteLine("#\t.dim directory already exists: " + DimDirectory);
-//			
-//			if(!Directory.Exists(Settings.UpdatesDir))
-//			{
-//				Directory.CreateDirectory(Settings.UpdatesDir);
-//				Console.WriteLine("#\tNew dim-updates directory created: " + Settings.UpdatesDir);
-//			}
-//			else 
-//				Console.WriteLine("#\tThe dim-updates directory already exists: " + Settings.UpdatesDir);
+			var loadDimDir = Settings.DimDirectory;
+			var loadLocalBackup = Settings.LocalBackupsDir;
+			var loadLocalUpdate = Settings.LocalUpdatesDir;
+			var loadUpdates = Settings.UpdatesDir;
+			var loadRoutinesDir = Settings.RoutinesDir;
+			var loadBaselineDir = Settings.BaselineDir;
 			
 			DimConsole.WriteLine("New project initialised!");
 			

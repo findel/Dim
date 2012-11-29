@@ -14,15 +14,13 @@ namespace Dim
 		
 		public static void WriteLine(string text)
 		{
-			Console.WriteLine("#\t" + text);
+			Console.WriteLine("#    " + text);
 			Console.WriteLine("#");
 		}
 		
 		public static void WriteInfoLine(string text)
 		{
-			Console.WriteLine("# -- Info -- ");
-			Console.WriteLine("# " + text);
-			Console.WriteLine("# ---------- ");
+			Console.WriteLine("#    * " + text);
 			Console.WriteLine("#");
 		}
 		

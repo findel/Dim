@@ -8,7 +8,7 @@ namespace Dim
 	{
 		public NewScript()
 		{
-			base.IsCommand("new", "Create a new script for updating your database.");
+			base.IsCommand("new", "Create a new script for updating your database");
 			this.HasOption("d|desc=", "desc", d => this.Desc = d);
 		}
 		

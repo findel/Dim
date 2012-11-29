@@ -46,6 +46,26 @@ namespace Dim
 			}
 		}
 		
+		internal static string RoutinesDir
+		{
+			get 
+			{ 
+				var dir = System.Environment.CurrentDirectory + @"\dim-routines";
+				CreateDir(dir);
+				return dir;
+			}
+		}
+		
+		internal static string BaselineDir
+		{
+			get 
+			{ 
+				var dir = System.Environment.CurrentDirectory + @"\dim-baseline";
+				CreateDir(dir);
+				return dir;
+			}
+		}
+		
 		internal static string LocalBackupsDir
 		{
 			get
@@ -70,8 +90,9 @@ namespace Dim
 		{
 			if(!Directory.Exists(dir))
 			{
-				Directory.CreateDirectory(dir);
-				DimConsole.WriteInfoLine("New directory created: " + Path.GetDirectoryName(dir));
+				var dirInfo = Directory.CreateDirectory(dir);
+				dirInfo.Attributes = att;
+				DimConsole.WriteInfoLine("New directory created: " + dir.Replace(System.Environment.CurrentDirectory, ""));
 			}
 		}
 	}
