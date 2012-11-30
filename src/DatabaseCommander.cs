@@ -26,6 +26,24 @@ namespace Dim
 			p.Close();
 		}
 		
+		public void DumpRoutines(string filePath)
+		{
+			var p = new Process();
+			p.StartInfo.UseShellExecute = false;
+			p.StartInfo.RedirectStandardOutput = true;
+			p.StartInfo.RedirectStandardInput = true;
+			p.StartInfo.FileName = Settings.MySqlBinPath + @"\mysqldump.exe";
+			p.StartInfo.Arguments = string.Format(@"-u{0} -p{1} --no-data --no-create-info --routines --comments {2}",
+			                                      Settings.MySqlUserName,
+			                                      Settings.MySqlPassword,
+			                                      Settings.MySqlSchemaName);
+			p.Start();
+			
+			File.WriteAllText(filePath, p.StandardOutput.ReadToEnd());
+			
+			p.Close();
+		}
+		
 		public void RunFile(string filePath)
 		{
 			var p = new Process();

@@ -7,43 +7,43 @@ namespace Dim
 	{
 		public Baseline()
 		{
-			base.IsCommand("baseline", "Create or restore a \"baseline\" script to create a database from scratch");
+			base.IsCommand("baseline", "Save or execute a \"baseline\" script; used to create a database from scratch");
 			
-			base.HasOption("c|create",
-			               "Create a new baseline script. Make sure you're happy with the existing data.",
-			               c => this.IsCreate = true);
+			base.HasOption("s|save",
+			               "Save a new baseline script. Make sure you're happy with the existing data.",
+			               x => this.IsSaving = true);
 			
-			base.HasOption("r|restore",
-			               "Restore the existing baseline script. This will replace any existing database.",
-			               r => this.IsRestore = true);
+			base.HasOption("e|execute",
+			               "Execute the existing baseline script. This will replace any existing database.",
+			               x => this.IsExecuting = true);
 		}
 		
-		private bool IsCreate { get; set; }
-		private bool IsRestore { get; set; }
+		private bool IsSaving { get; set; }
+		private bool IsExecuting { get; set; }
 		
 		public override int Run(string[] remainingArguments)
 		{
 			var baselineFile = Settings.BaselineDir + "\\baseline.sql";
 			
-			if(this.IsCreate)
+			if(this.IsSaving)
 			{
-				Create(baselineFile);
+				this.Save(baselineFile);
 			}
-			else if(this.IsRestore)
+			else if(this.IsExecuting)
 			{
-				Restore(baselineFile);
+				this.Execute(baselineFile);
 			}
 			else
 			{
-				throw new ManyConsole.ConsoleHelpAsException("Neither \"create\" or \"restore\" was chosen");
+				throw new ManyConsole.ConsoleHelpAsException("Neither \"save\" or \"execute\" was chosen");
 			}
 			
 			return 0;
 		}
 		
-		private void Create(string baselineFile)
+		private void Save(string baselineFile)
 		{
-			DimConsole.WriteIntro("Creating a new baseline script.");
+			DimConsole.WriteIntro("Saving a new baseline script.");
 
 			if(!this.DryRun)
 			{
@@ -53,12 +53,12 @@ namespace Dim
 				}
 			}
 
-			DimConsole.WriteLine("Baseline created. Now you can share this with others.", baselineFile);
+			DimConsole.WriteLine("Saved! Now you can share this with others.", baselineFile);
 		}
 		
-		private void Restore(string baselineFile)
+		private void Execute(string baselineFile)
 		{
-			DimConsole.WriteIntro("Restoring the current baseline.");
+			DimConsole.WriteIntro("Executing the current baseline script.");
 			if(File.Exists(baselineFile))
 			{
 				DimConsole.WriteLine("Backing up existing database first.");
@@ -72,7 +72,7 @@ namespace Dim
 					}
 				}
 
-				DimConsole.WriteLine("Baseline restored!");
+				DimConsole.WriteLine("Baseline script executed!");
 
 			}
 			else

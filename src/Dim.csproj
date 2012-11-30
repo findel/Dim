@@ -61,6 +61,7 @@
     <Compile Include="NewScript.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routines.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Update.cs" />
   </ItemGroup>
