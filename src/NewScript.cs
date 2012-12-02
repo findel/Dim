@@ -16,6 +16,9 @@ namespace Dim
 		
 		public override int Run(string[] remainingArguments)
 		{
+			if(base.LocalConfigNotFound)
+				return base.RunDimInit();
+			
 			DimConsole.WriteIntro("Creating a new file");
 			var universalNow = DateTime.Now.ToUniversalTime();
 			

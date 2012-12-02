@@ -40,6 +40,14 @@ namespace Dim
 			}
 		}
 		
+		internal static string LocalDimConfig
+		{
+			get
+			{
+				return System.Environment.CurrentDirectory + @"\dim.config";
+			}
+		}
+		
 		internal static string UpdatesDir
 		{
 			get 

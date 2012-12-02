@@ -16,6 +16,12 @@ namespace Dim
 		{
 			DimConsole.WriteIntro("Initialising a new Dim project.");
 			
+			if(!File.Exists(Settings.LocalDimConfig))
+			{
+				File.Create(Settings.LocalDimConfig);
+				DimConsole.WriteLine("New dim.config file created.", Settings.LocalDimConfig);
+			}
+			
 			var loadDimDir = Settings.DimDirectory;
 			DimConsole.WriteInfoLine("Tell your version control software to ignore the .dim directory.");
 			var loadLocalBackup = Settings.LocalBackupsDir;
