@@ -8,7 +8,9 @@ namespace Dim
 		
 		public static void WriteIntro(string intro)
 		{
+			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.WriteLine("#### " + intro + " ####");
+			Console.ResetColor();
 			Console.WriteLine("#");
 		}
 		
