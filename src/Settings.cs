@@ -30,7 +30,7 @@ namespace Dim
 			get { return "dim-tests"; }
 		}
 		
-		internal static string DimDirectory
+		internal static string LocalDimDirectory
 		{
 			get
 			{
@@ -48,7 +48,7 @@ namespace Dim
 			}
 		}
 		
-		internal static string UpdatesDir
+		internal static string SharedPatchesDir
 		{
 			get 
 			{ 
@@ -58,7 +58,7 @@ namespace Dim
 			}
 		}
 		
-		internal static string RoutinesDir
+		internal static string SharedRoutinesDir
 		{
 			get 
 			{ 
@@ -68,7 +68,7 @@ namespace Dim
 			}
 		}
 		
-		internal static string BaselineDir
+		internal static string SharedBaselineDir
 		{
 			get 
 			{ 
@@ -82,17 +82,17 @@ namespace Dim
 		{
 			get
 			{ 
-				var dir = DimDirectory + @"\backups"; 
+				var dir = LocalDimDirectory + @"\backups"; 
 				CreateDir(dir);
 				return dir;
 			}
 		}
 		
-		internal static string LocalUpdatesDir
+		internal static string LocalPatchesDir
 		{
 			get
 			{
-				var dir = DimDirectory + @"\updates";
+				var dir = LocalDimDirectory + @"\updates";
 				CreateDir(dir);
 				return dir;
 			}

@@ -16,9 +16,28 @@ namespace Dim
 			return ConsoleCommandDispatcher.DispatchCommand(commands, args, Console.Out);
 		}
 		
+		public static bool IsCorrectlySetup
+		{
+			get
+			{
+				bool correct = true;
+				
+				if(!Config.Local.LocalConfigExists)
+				{
+					DimConsole.WriteIntro("DIM project not found!");
+					DimConsole.WriteInfoLine("This directory is not setup correctly for Dim. The 'dim.config' file is missing.");
+					DimConsole.WriteInfoLine("Run 'dim init' to create a new Dim project here.");
+					correct = false;
+				}
+				
+				return correct;
+			}
+		}
+		
 		private static IEnumerable<ConsoleCommand> GetCommands()
 		{
 			return ConsoleCommandDispatcher.FindCommandsInSameAssemblyAs(typeof(Program));
 		}
+
 	}
 }

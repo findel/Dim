@@ -16,8 +16,7 @@ namespace Dim
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(base.LocalConfigNotFound)
-				return base.RunDimInit();
+			if(!Program.IsCorrectlySetup) return 0;
 			
 			DimConsole.WriteIntro("Running a complete backup");
 			CreateBackup(base.DryRun, this.FilePath);

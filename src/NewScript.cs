@@ -16,8 +16,7 @@ namespace Dim
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(base.LocalConfigNotFound)
-				return base.RunDimInit();
+			if(!Program.IsCorrectlySetup) return 0;
 			
 			DimConsole.WriteIntro("Creating a new file");
 			var universalNow = DateTime.Now.ToUniversalTime();
@@ -29,7 +28,7 @@ namespace Dim
 			fileName = string.Format(fileName, universalNow.ToString("yyyyMMdd"), universalNow.Ticks.ToString(), this.Desc);
 			
 			if(!base.DryRun)
-				File.Create(Settings.UpdatesDir + @"\" + fileName);
+				File.Create(Settings.SharedPatchesDir + @"\" + fileName);
 			
 			DimConsole.WriteLine("A new file has been created for you to use. " +
 			                     "Don't edit after you have shared it with others.",

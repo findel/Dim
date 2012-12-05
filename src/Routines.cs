@@ -23,10 +23,9 @@ namespace Dim
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(base.LocalConfigNotFound)
-				return base.RunDimInit();
+			if(!Program.IsCorrectlySetup) return 0;
 			
-			var routinesFile = Settings.RoutinesDir + "\\routines.sql";
+			var routinesFile = Settings.SharedRoutinesDir + "\\routines.sql";
 			
 			if(this.IsSaving)
 			{

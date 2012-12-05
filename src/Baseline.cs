@@ -23,10 +23,9 @@ namespace Dim
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(base.LocalConfigNotFound)
-				return base.RunDimInit();
+			if(!Program.IsCorrectlySetup) return 0;
 			
-			var baselineFile = Settings.BaselineDir + "\\baseline.sql";
+			var baselineFile = Settings.SharedBaselineDir + "\\baseline.sql";
 			
 			if(this.IsSaving)
 			{

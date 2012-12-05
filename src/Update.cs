@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Dim.Scripts;
 using ManyConsole;
 
 namespace Dim
@@ -17,28 +18,24 @@ namespace Dim
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(base.LocalConfigNotFound)
-				return base.RunDimInit();
+			if(!Program.IsCorrectlySetup) return 0;
 			
-			DimConsole.WriteIntro("Checking for scripts to update the database");
+			DimConsole.WriteIntro("Update the local database");
 			
-			var filesToUse = (from f in Directory.GetFiles(Settings.UpdatesDir)
-			                  where Path.GetExtension(f).ToLower() == ".sql"
-			                  && !File.Exists(Settings.LocalUpdatesDir + @"\" + Path.GetFileName(f))
-			                  select f).ToList();
+			var newPatchFiles = Patches.GetNewPatches();
 			
-			if(filesToUse.Count > 0)
+			if(newPatchFiles.Count > 0)
 			{
 				// Display count of files found.
-				DimConsole.WriteLine(string.Format("{0} script{1} found.",
-				                                   filesToUse.Count,
-				                                   (filesToUse.Count > 0 ? "s" : "")));
+				DimConsole.WriteLine(string.Format("{0} new patch{1} found.",
+				                                   newPatchFiles.Count,
+				                                   (newPatchFiles.Count > 0 ? "es" : "")));
 				
 				// Display names of files found.
-				for(int i = 0, l = filesToUse.Count; i < l; i++)
+				for(int i = 0, l = newPatchFiles.Count; i < l; i++)
 				{
 					int count = i + 1;
-					var fileName = Path.GetFileName(filesToUse[i]);
+					var fileName = Path.GetFileName(newPatchFiles[i]);
 					DimConsole.WriteLine(string.Format("{0}. \"{1}\"", count, fileName));
 				}
 				
@@ -46,28 +43,16 @@ namespace Dim
 				DimConsole.WriteLine("Backing up database (local backup)");
 				Backup.CreateBackup(base.DryRun);
 				
-				foreach(var filePath in filesToUse)
+				Patches.ExecuteNewPatches(base.DryRun, delegate(string patchFilePath)
 				{
-					var fileName = Path.GetFileName(filePath);
-					
-					DimConsole.WriteLine("Running: \"" + fileName + "\"");
-					
-					// Execute mysql
-					if(!base.DryRun)
-					{
-						using(var db = new DatabaseCommander())
-						{
-							db.RunFile(filePath);
-						}
-						File.Copy(filePath, Settings.LocalUpdatesDir + "\\" + fileName);
-					}
-					DimConsole.WriteLine("Finished.");
-				}
-				DimConsole.WriteLine("Update Completed.");
+					DimConsole.WriteLine("Executing: \"" + Path.GetFileName(patchFilePath) + "\"");
+				});
+				
+				DimConsole.WriteLine("Update completed.");
 			}
 			else
 			{
-				DimConsole.WriteLine("No migration files found.");
+				DimConsole.WriteLine("No patch files found.");
 			}
 			
 			

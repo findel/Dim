@@ -22,13 +22,13 @@ namespace Dim
 				DimConsole.WriteLine("New dim.config file created.", Settings.LocalDimConfig);
 			}
 			
-			var loadDimDir = Settings.DimDirectory;
+			var loadDimDir = Settings.LocalDimDirectory;
 			DimConsole.WriteInfoLine("Tell your version control software to ignore the .dim directory.");
 			var loadLocalBackup = Settings.LocalBackupsDir;
-			var loadLocalUpdate = Settings.LocalUpdatesDir;
-			var loadUpdates = Settings.UpdatesDir;
-			var loadRoutinesDir = Settings.RoutinesDir;
-			var loadBaselineDir = Settings.BaselineDir;
+			var loadLocalUpdate = Settings.LocalPatchesDir;
+			var loadUpdates = Settings.SharedPatchesDir;
+			var loadRoutinesDir = Settings.SharedRoutinesDir;
+			var loadBaselineDir = Settings.SharedBaselineDir;
 			
 			DimConsole.WriteLine("New project initialised!");
 			

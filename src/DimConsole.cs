@@ -8,9 +8,12 @@ namespace Dim
 		
 		public static void WriteIntro(string intro)
 		{
+			Console.WriteLine(" ");
+			Console.Write("#### ");
 			Console.ForegroundColor = ConsoleColor.DarkYellow;
-			Console.WriteLine("#### " + intro + " ####");
+			Console.Write(intro);
 			Console.ResetColor();
+			Console.WriteLine(" ####");
 			Console.WriteLine("#");
 		}
 		
@@ -34,7 +37,6 @@ namespace Dim
 			Console.WriteLine("* " + line1);
 			Console.ResetColor();
 			Console.WriteLine("#");
-			
 		}
 		
 		private static int loaderCounter = 0;
