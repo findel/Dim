@@ -41,12 +41,12 @@ namespace Dim
 				
 				// Backup before running anything (use for rollback)
 				DimConsole.WriteLine("Backing up database (local backup)");
-				
 				Backups.SaveFile(base.DryRun, completedCallback: delegate(string fileName)
 				{
 					DimConsole.WriteLine("Completed backup:", fileName);
 				});
 				
+				// Execute all new patches
 				Patches.ExecuteNewPatches(base.DryRun, delegate(string patchFilePath)
 				{
 					DimConsole.WriteLine("Executing: \"" + Path.GetFileName(patchFilePath) + "\"");

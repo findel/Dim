@@ -20,14 +20,12 @@ namespace Dim.Scripts
 			{
 				using(var db = new DatabaseCommander())
 				{
-					db.Dump(filePath);
+					db.DumpBackup(filePath);
 				}
 			}
 			
 			if(completedCallback != null)
 				completedCallback(filePath);
-			
-			
 		}
 	}
 }

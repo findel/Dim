@@ -22,19 +22,21 @@ namespace Dim
 		private bool IsSaving { get; set; }
 		private bool IsExecuting { get; set; }
 		
+		private string structureFileName = Settings.SharedBaselineDir + "\\structure.sql";
+		private string dataFileName = Settings.SharedBaselineDir + "\\data.sql";
+		private string routinesFileName = Settings.SharedRoutinesDir + "\\routines.sql";
+		
 		public override int Run(string[] remainingArguments)
 		{
 			if(!Program.IsCorrectlySetup) return 0;
 			
-			var baselineFile = Settings.SharedBaselineDir + "\\baseline.sql";
-			
 			if(this.IsSaving)
 			{
-				this.Save(baselineFile);
+				this.Save();
 			}
 			else if(this.IsExecuting)
 			{
-				this.Execute(baselineFile);
+				this.Execute();
 			}
 			else
 			{
@@ -44,7 +46,7 @@ namespace Dim
 			return 0;
 		}
 		
-		private void Save(string baselineFile)
+		private void Save()
 		{
 			DimConsole.WriteIntro("Saving a new baseline script.");
 
@@ -52,20 +54,26 @@ namespace Dim
 			{
 				using(var db = new DatabaseCommander())
 				{
-					db.Dump(baselineFile);
+					db.DumpStructure(this.structureFileName);
+					db.DumpData(this.dataFileName);
+					db.DumpRoutines(this.routinesFileName);
 				}
 			}
 
-			DimConsole.WriteLine("Saved! Now you can share this with others.", baselineFile);
+			DimConsole.WriteLine("Structure file:", this.structureFileName);
+			DimConsole.WriteLine("Data file:", this.dataFileName);
+			DimConsole.WriteLine("Routines file:", this.routinesFileName);
+			
+			DimConsole.WriteLine("Saved! Now you can share changes with others.");
 		}
 		
-		private void Execute(string baselineFile)
+		private void Execute()
 		{
 			DimConsole.WriteIntro("Executing the current baseline script.");
-			if(File.Exists(baselineFile))
+			if(File.Exists(this.structureFileName) && File.Exists(this.dataFileName) && File.Exists(this.routinesFileName))
 			{
-				DimConsole.WriteLine("Backing up existing database first.");
 				
+				DimConsole.WriteLine("Backing up existing database first.");
 				Backups.SaveFile(base.DryRun, completedCallback: delegate(string filePath)
 				{
 					DimConsole.WriteLine("Backup completed:", filePath);
@@ -75,7 +83,9 @@ namespace Dim
 				{
 					using(var db = new DatabaseCommander())
 					{
-						db.RunFile(baselineFile);
+						db.RunFile(this.structureFileName);
+						db.RunFile(this.dataFileName);
+						db.RunFile(this.routinesFileName);
 					}
 				}
 
@@ -84,7 +94,7 @@ namespace Dim
 			}
 			else
 			{
-				DimConsole.WriteLine("baseline.sql file does not exist.");
+				DimConsole.WriteLine("One of the required baseline files does not exist.");
 			}
 		}
 		
