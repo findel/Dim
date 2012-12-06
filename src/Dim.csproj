@@ -63,6 +63,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routines.cs" />
+    <Compile Include="Scripts\Backups.cs" />
     <Compile Include="Scripts\Patches.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Update.cs" />

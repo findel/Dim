@@ -1,4 +1,5 @@
 ﻿using System;
+using Dim.Scripts;
 
 namespace Dim
 {
@@ -19,30 +20,12 @@ namespace Dim
 			if(!Program.IsCorrectlySetup) return 0;
 			
 			DimConsole.WriteIntro("Running a complete backup");
-			CreateBackup(base.DryRun, this.FilePath);
+			//CreateBackup(base.DryRun, this.FilePath);
+			Backups.SaveFile(base.DryRun, this.FilePath, delegate(string filePath)
+			{
+				DimConsole.WriteLine("Backup completed:", filePath);
+			});
 			return 0;
-		}
-		
-		internal static void CreateBackup(bool dryRun, string filePath = null)
-		{
-			if(string.IsNullOrEmpty(filePath))
-			{
-				var universalNow = DateTime.Now.ToUniversalTime();
-				filePath = string.Format("{0}\\{1}-{2}.sql",
-			                         Settings.LocalBackupsDir,
-			                         universalNow.ToString("yyyyMMdd"),
-			                         universalNow.Ticks.ToString());
-			}
-			
-			if(!dryRun)
-			{
-				using(var db = new DatabaseCommander())
-				{
-					db.Dump(filePath);
-				}
-			}
-			
-			DimConsole.WriteLine("Backup completed:",  filePath);
 		}
 		
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Dim.Scripts;
 
 namespace Dim
 {
@@ -64,7 +65,11 @@ namespace Dim
 			if(File.Exists(baselineFile))
 			{
 				DimConsole.WriteLine("Backing up existing database first.");
-				Backup.CreateBackup(base.DryRun);
+				
+				Backups.SaveFile(base.DryRun, completedCallback: delegate(string filePath)
+				{
+					DimConsole.WriteLine("Backup completed:", filePath);
+				});
 
 				if(!base.DryRun)
 				{
