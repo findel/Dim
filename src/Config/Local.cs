@@ -13,5 +13,13 @@ namespace Dim.Config
 				return File.Exists(Settings.LocalDimConfig);
 			}
 		}
+		
+		public static ConfigFile ConfigFile
+		{
+			get
+			{
+				return ConfigFile.GetInstance();
+			}
+		}
 	}
 }

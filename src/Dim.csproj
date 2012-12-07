@@ -37,6 +37,9 @@
     <Reference Include="NDesk.Options">
       <HintPath>packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
@@ -54,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Backup.cs" />
     <Compile Include="Baseline.cs" />
+    <Compile Include="Config\ConfigFile.cs" />
     <Compile Include="Config\Local.cs" />
     <Compile Include="DatabaseCommander.cs" />
     <Compile Include="DimCommand.cs" />

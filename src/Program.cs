@@ -29,6 +29,20 @@ namespace Dim
 					DimConsole.WriteInfoLine("Run 'dim init' to create a new Dim project here.");
 					correct = false;
 				}
+				else
+				{
+					try
+					{
+						var config = Config.Local.ConfigFile;
+					}
+					catch (Exception ex)
+					{
+						DimConsole.WriteIntro("Config could not load!");
+						DimConsole.WriteInfoLine("The dim.config file could not be loaded.");
+						DimConsole.WriteLine(ex.InnerException.GetType().ToString(), ex.InnerException.Message);
+						correct = false;
+					}
+				}
 				
 				return correct;
 			}

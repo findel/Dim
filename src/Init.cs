@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using Dim.Config;
 using ManyConsole;
 
 namespace Dim
@@ -44,7 +45,17 @@ namespace Dim
 			
 			if(!File.Exists(Settings.LocalDimConfig))
 			{
-				File.Create(Settings.LocalDimConfig);
+				
+				var config = new ConfigFile()
+				{
+					Host = this.Host,
+					Port = this.Port,
+					Username = this.Username,
+					Password = this.Password,
+					Schema = this.Schema
+				};
+				config.SaveConfig();
+				
 				DimConsole.WriteLine("New dim.config file created.", Settings.LocalDimConfig);
 			}
 			

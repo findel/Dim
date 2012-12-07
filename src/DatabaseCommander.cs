@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Dim.Config;
 
 namespace Dim
 {
@@ -37,7 +38,13 @@ namespace Dim
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.RedirectStandardInput = true;
 			p.StartInfo.FileName = Settings.MySqlBinPath + @"\mysqldump.exe";
-			p.StartInfo.Arguments = string.Format(@"-u{0} -p{1} {2} {3}", Settings.MySqlUserName, Settings.MySqlPassword, options, Settings.MySqlSchemaName);
+			p.StartInfo.Arguments = string.Format(@"-h{0} -P{1} -u{2} -p{3} {4} {5}",
+			                                      Local.ConfigFile.Host,
+			                                      Local.ConfigFile.Port,
+			                                      Local.ConfigFile.Username,
+			                                      Local.ConfigFile.Password,
+			                                      options, 
+			                                      Local.ConfigFile.Schema);
 			p.Start();
 			
 			File.WriteAllText(filePath, p.StandardOutput.ReadToEnd());
@@ -56,10 +63,12 @@ namespace Dim
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.RedirectStandardInput = true;
 			p.StartInfo.FileName = Settings.MySqlBinPath + "\\mysql.exe";
-			p.StartInfo.Arguments = string.Format("-u{0} -p{1} {2}",
-			                                      Settings.MySqlUserName,
-			                                      Settings.MySqlPassword,
-			                                      Settings.MySqlSchemaName);
+			p.StartInfo.Arguments = string.Format("-h{0} -P{1} -u{2} -p{3} {4}",
+			                                      Local.ConfigFile.Host,
+			                                      Local.ConfigFile.Port,
+			                                      Local.ConfigFile.Username,
+			                                      Local.ConfigFile.Password,
+			                                      Local.ConfigFile.Schema);
 			p.Start();
 
 			using (var streamReader = new StreamReader(filePath))
