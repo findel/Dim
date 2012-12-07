@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Dim.Config;
@@ -52,8 +53,39 @@ namespace Dim
 					Port = this.Port,
 					Username = this.Username,
 					Password = this.Password,
-					Schema = this.Schema
+					Schema = this.Schema,
+					Patches = new DimFolder()
+					{
+						Path = "\\dim-patches",
+						RunKind = RunKind.RunOnce
+					},
+					Routines = new DimFolder()
+					{
+						Path = "\\dim-routines",
+						RunKind = RunKind.RunIfChanged
+					},
+					Baseline = new DimFolder()
+					{
+						Path = "\\dim-baseline",
+						RunKind = RunKind.None
+					}
 				};
+				
+//				var viewsFolder = new DimFolder()
+//				{
+//					Path = "\\dim-views",
+//					RunKind = RunKind.RunAlways
+//				};
+//				
+//				var lookupFolder = new DimFolder()
+//				{
+//					Path = "\\dim-lookup",
+//					RunKind = RunKind.RunIfChanged
+//				};
+//				config.CustomFolders = new List<DimFolder>();
+//				config.CustomFolders.Add(viewsFolder);
+//				config.CustomFolders.Add(lookupFolder);
+				
 				Config.Local.SaveConfig(config);
 				
 				DimConsole.WriteLine("New config file created.", Settings.LocalDimConfig);

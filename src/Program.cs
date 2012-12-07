@@ -42,6 +42,8 @@ namespace Dim
 						DimConsole.WriteLine(ex.InnerException.GetType().ToString(), ex.InnerException.Message);
 						correct = false;
 					}
+					
+					// TODO Check that credentials can connect.
 				}
 				
 				return correct;
