@@ -54,9 +54,9 @@ namespace Dim
 					Password = this.Password,
 					Schema = this.Schema
 				};
-				config.SaveConfig();
+				Config.Local.SaveConfig(config);
 				
-				DimConsole.WriteLine("New dim.config file created.", Settings.LocalDimConfig);
+				DimConsole.WriteLine("New config file created.", Settings.LocalDimConfig);
 			}
 			
 			var loadDimDir = Settings.LocalDimDirectory;

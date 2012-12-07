@@ -25,7 +25,7 @@ namespace Dim
 				if(!Config.Local.LocalConfigExists)
 				{
 					DimConsole.WriteIntro("DIM project not found!");
-					DimConsole.WriteInfoLine("This directory is not setup correctly for Dim. The 'dim.config' file is missing.");
+					DimConsole.WriteInfoLine("This directory is not setup correctly for Dim. The config file is missing.");
 					DimConsole.WriteInfoLine("Run 'dim init' to create a new Dim project here.");
 					correct = false;
 				}
@@ -38,7 +38,7 @@ namespace Dim
 					catch (Exception ex)
 					{
 						DimConsole.WriteIntro("Config could not load!");
-						DimConsole.WriteInfoLine("The dim.config file could not be loaded.");
+						DimConsole.WriteInfoLine("The config file could not be loaded.");
 						DimConsole.WriteLine(ex.InnerException.GetType().ToString(), ex.InnerException.Message);
 						correct = false;
 					}
