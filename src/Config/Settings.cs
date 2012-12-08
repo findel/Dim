@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.IO;
 
-namespace Dim
+namespace Dim.Config
 {
 	public static class Settings
 	{

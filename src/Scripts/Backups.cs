@@ -12,7 +12,7 @@ namespace Dim.Scripts
 			{
 				var universalNow = DateTime.Now.ToUniversalTime();
 				filePath = string.Format("{0}\\{1}-{2}.sql",
-			                         Settings.LocalBackupsDir,
+			                         Config.Settings.LocalBackupsDir,
 			                         universalNow.ToString("yyyyMMdd"),
 			                         universalNow.Ticks.ToString());
 			}

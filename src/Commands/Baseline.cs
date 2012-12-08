@@ -23,9 +23,9 @@ namespace Dim.Commands
 		private bool IsSaving { get; set; }
 		private bool IsExecuting { get; set; }
 		
-		private string structureFileName = Settings.SharedBaselineDir + "\\structure.sql";
-		private string dataFileName = Settings.SharedBaselineDir + "\\data.sql";
-		private string routinesFileName = Settings.SharedRoutinesDir + "\\routines.sql";
+		private string structureFileName = Config.Settings.SharedBaselineDir + "\\structure.sql";
+		private string dataFileName = Config.Settings.SharedBaselineDir + "\\data.sql";
+		private string routinesFileName = Config.Settings.SharedRoutinesDir + "\\routines.sql";
 		
 		public override int Run(string[] remainingArguments)
 		{

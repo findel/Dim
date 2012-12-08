@@ -27,7 +27,7 @@ namespace Dim.Commands
 		{
 			if(!Program.IsCorrectlySetup) return 0;
 			
-			var routinesFile = Settings.SharedRoutinesDir + "\\routines.sql";
+			var routinesFile = Config.Settings.SharedRoutinesDir + "\\routines.sql";
 			
 			if(this.IsSaving)
 			{

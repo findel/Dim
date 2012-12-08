@@ -12,9 +12,9 @@ namespace Dim.Scripts
 		
 		public static List<string> GetNewPatches()
 		{
-			var newPatches = (from f in Directory.GetFiles(Settings.SharedPatchesDir)
+			var newPatches = (from f in Directory.GetFiles(Config.Settings.SharedPatchesDir)
 			                  where Path.GetExtension(f).ToLower() == ".sql"
-			                  && !File.Exists(Settings.LocalPatchesDir + @"\" + Path.GetFileName(f))
+			                  && !File.Exists(Config.Settings.LocalPatchesDir + @"\" + Path.GetFileName(f))
 			                  select f).ToList();
 			return newPatches;
 		}
@@ -22,7 +22,7 @@ namespace Dim.Scripts
 		public static void RegisterPatchCompleted(string patchFilePath)
 		{
 			//File.Copy(patchFilePath, Settings.LocalPatchesDir + "\\" + fileName);
-			File.Create(Settings.LocalPatchesDir + "\\" + Path.GetFileName(patchFilePath));
+			File.Create(Config.Settings.LocalPatchesDir + "\\" + Path.GetFileName(patchFilePath));
 		}
 		
 		public static void ExecuteNewPatches(bool dryRun, Action<string> callBeforeExecute = null)
