@@ -28,28 +28,4 @@ namespace Dim.Config
 		
 		public List<DimFolder> CustomFolders { get; set; }
 	}
-	
-	public class DimFolder
-	{
-		public DimFolder(){}
-		
-		public string Path { get; set; }
-		
-		public RunKind RunKind { get; set; }
-		
-		public string GetFullPath()
-		{
-			var dir = System.Environment.CurrentDirectory + this.Path;
-			Local.CreateDir(dir);
-			return dir;
-		}
-	}
-	
-	public enum RunKind
-	{
-		None = 0,
-		RunOnce = 1,
-		RunIfChanged = 2,
-		RunAlways = 3
-	}
 }
