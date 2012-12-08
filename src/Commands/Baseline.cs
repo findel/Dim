@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Dim.Database;
 using Dim.Scripts;
 
 namespace Dim.Commands

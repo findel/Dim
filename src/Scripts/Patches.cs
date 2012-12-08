@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+using Dim.Database;
+
 namespace Dim.Scripts
 {
 	public static class Patches

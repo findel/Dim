@@ -76,7 +76,7 @@
     <Compile Include="Commands\Update.cs" />
     <Compile Include="Config\ConfigFile.cs" />
     <Compile Include="Config\Local.cs" />
-    <Compile Include="DatabaseCommander.cs" />
+    <Compile Include="Database\DatabaseCommander.cs" />
     <Compile Include="DimConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +91,7 @@
   <ItemGroup>
     <Folder Include="Config" />
     <Folder Include="Commands" />
+    <Folder Include="Database" />
     <Folder Include="Scripts" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

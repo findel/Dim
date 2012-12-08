@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Dim.Config;
 
-namespace Dim
+namespace Dim.Database
 {
 	public class DatabaseCommander : IDisposable
 	{
