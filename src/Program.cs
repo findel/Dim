@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dim.Database;
 using ManyConsole;
 
 namespace Dim
@@ -39,11 +40,22 @@ namespace Dim
 					{
 						DimConsole.WriteIntro("Config could not load!");
 						DimConsole.WriteInfoLine("The config file could not be loaded.");
-						DimConsole.WriteLine(ex.InnerException.GetType().ToString(), ex.InnerException.Message);
+						DimConsole.WriteErrorLine(ex.InnerException.GetType().ToString());
+						DimConsole.WriteErrorLine(ex.InnerException.Message);
 						correct = false;
 					}
 					
-					// TODO Check that credentials can connect.
+					// Check that credentials can connect.
+					using(var comm = new DatabaseCommander())
+					{
+						if(!comm.IsConnectionOkay())
+						{
+							DimConsole.WriteIntro("Database connection failed!");
+							DimConsole.WriteInfoLine("The database could not be connected to using the provided details.");
+							DimConsole.WriteErrorLine(comm.MySqlException.Message);
+							correct = false;
+						}
+					}
 				}
 				
 				return correct;

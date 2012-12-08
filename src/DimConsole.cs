@@ -39,6 +39,15 @@ namespace Dim
 			Console.WriteLine("#");
 		}
 		
+		public static void WriteErrorLine(string line1)
+		{
+			Console.Write("#    ");
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine("! " + line1);
+			Console.ResetColor();
+			Console.WriteLine("#");
+		}
+		
 		private static int loaderCounter = 0;
 		
 		public static void WriteLoader()

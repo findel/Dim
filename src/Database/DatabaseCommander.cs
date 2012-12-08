@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using Dim.Config;
+using MySql.Data.MySqlClient;
 
 namespace Dim.Database
 {
@@ -81,6 +82,32 @@ namespace Dim.Database
 		}
 		
 		#endregion
+		
+		public bool IsConnectionOkay()
+		{
+			string connString = string.Format("server={0};port={1};uid={2};pwd={3};database={4};",
+			                                  Config.Local.ConfigFile.Host,
+			                                  Config.Local.ConfigFile.Port,
+			                                  Config.Local.ConfigFile.Username,
+			                                  Config.Local.ConfigFile.Password,
+			                                  Config.Local.ConfigFile.Schema);
+			
+			var okay = true;
+			
+			try 
+			{
+				MySqlConnection conn = new MySqlConnection(connString);
+				conn.Open();
+			}
+			catch (MySqlException ex)
+			{
+				okay = false;
+				this.MySqlException = ex;
+			}
+			return okay;
+		}
+		
+		public MySqlException MySqlException { get; set; }
 		
 		void IDisposable.Dispose()
 		{
