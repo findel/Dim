@@ -8,11 +8,51 @@ namespace Dim.Config
 {
 	public static class Local
 	{
+		
+		internal static string LocalDimDirectory
+		{
+			get
+			{
+				var dir = System.Environment.CurrentDirectory + @"\.dim";
+				CreateDir(dir, FileAttributes.Directory | FileAttributes.Hidden);
+				return dir;
+			}
+		}
+		
+		internal static string LocalBackupsDir
+		{
+			get
+			{ 
+				var dir = LocalDimDirectory + @"\backups"; 
+				CreateDir(dir);
+				return dir;
+			}
+		}
+		
+		// TODO Remove local patches directory - use database instead.
+		internal static string LocalPatchesDir
+		{
+			get
+			{
+				var dir = LocalDimDirectory + @"\patches";
+				CreateDir(dir);
+				return dir;
+			}
+		}
+		
+		internal static string LocalDimConfig
+		{
+			get
+			{
+				return System.Environment.CurrentDirectory + @"\dimconfig.json";
+			}
+		}
+		
 		public static bool LocalConfigExists
 		{
 			get
 			{
-				return File.Exists(Settings.LocalDimConfig);
+				return File.Exists(LocalDimConfig);
 			}
 		}
 		
@@ -31,7 +71,7 @@ namespace Dim.Config
 			ConfigFile file = null;
 			if(Local.LocalConfigExists)
 			{
-				using (var streamReader = new StreamReader(Settings.LocalDimConfig))
+				using (var streamReader = new StreamReader(Local.LocalDimConfig))
 				{
 					string configString = streamReader.ReadToEnd();
 					//JObject jobject = JObject.Parse(configString);
@@ -46,7 +86,17 @@ namespace Dim.Config
 			if(!Local.LocalConfigExists)
 			{
 				var configString = JsonConvert.SerializeObject(file, Formatting.Indented);
-				File.WriteAllText(Settings.LocalDimConfig, configString);
+				File.WriteAllText(Local.LocalDimConfig, configString);
+			}
+		}
+		
+		internal static void CreateDir(string dir, FileAttributes att = FileAttributes.Directory)
+		{
+			if(!Directory.Exists(dir))
+			{
+				var dirInfo = Directory.CreateDirectory(dir);
+				dirInfo.Attributes = att;
+				DimConsole.WriteInfoLine("New directory created: " + dir.Replace(System.Environment.CurrentDirectory, ""));
 			}
 		}
 		

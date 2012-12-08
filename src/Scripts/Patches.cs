@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using Dim.Config;
 using Dim.Database;
 
 namespace Dim.Scripts
@@ -12,9 +12,9 @@ namespace Dim.Scripts
 		
 		public static List<string> GetNewPatches()
 		{
-			var newPatches = (from f in Directory.GetFiles(Config.Settings.SharedPatchesDir)
+			var newPatches = (from f in Directory.GetFiles(Local.ConfigFile.Patches.GetFullPath())
 			                  where Path.GetExtension(f).ToLower() == ".sql"
-			                  && !File.Exists(Config.Settings.LocalPatchesDir + @"\" + Path.GetFileName(f))
+			                  && !File.Exists(Local.ConfigFile.Patches.GetFullPath() + @"\" + Path.GetFileName(f))
 			                  select f).ToList();
 			return newPatches;
 		}
@@ -22,7 +22,7 @@ namespace Dim.Scripts
 		public static void RegisterPatchCompleted(string patchFilePath)
 		{
 			//File.Copy(patchFilePath, Settings.LocalPatchesDir + "\\" + fileName);
-			File.Create(Config.Settings.LocalPatchesDir + "\\" + Path.GetFileName(patchFilePath));
+			File.Create(Local.ConfigFile.Patches.GetFullPath() + "\\" + Path.GetFileName(patchFilePath));
 		}
 		
 		public static void ExecuteNewPatches(bool dryRun, Action<string> callBeforeExecute = null)

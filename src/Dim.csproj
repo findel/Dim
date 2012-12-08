@@ -76,7 +76,6 @@
     <Compile Include="Commands\Update.cs" />
     <Compile Include="Config\ConfigFile.cs" />
     <Compile Include="Config\Local.cs" />
-    <Compile Include="Config\Settings.cs" />
     <Compile Include="Database\DatabaseCommander.cs" />
     <Compile Include="DimConsole.cs" />
     <Compile Include="Program.cs" />

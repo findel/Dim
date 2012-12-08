@@ -1,4 +1,5 @@
 ﻿using System;
+using Dim.Config;
 using Dim.Database;
 
 namespace Dim.Scripts
@@ -12,7 +13,7 @@ namespace Dim.Scripts
 			{
 				var universalNow = DateTime.Now.ToUniversalTime();
 				filePath = string.Format("{0}\\{1}-{2}.sql",
-			                         Config.Settings.LocalBackupsDir,
+			                         Local.LocalBackupsDir,
 			                         universalNow.ToString("yyyyMMdd"),
 			                         universalNow.Ticks.ToString());
 			}

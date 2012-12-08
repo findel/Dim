@@ -44,7 +44,7 @@ namespace Dim.Commands
 		{
 			DimConsole.WriteIntro("Initialising a new Dim project.");
 			
-			if(!File.Exists(Settings.LocalDimConfig))
+			if(!File.Exists(Local.LocalDimConfig))
 			{
 				
 				var config = new ConfigFile()
@@ -54,19 +54,20 @@ namespace Dim.Commands
 					Username = this.Username,
 					Password = this.Password,
 					Schema = this.Schema,
+					MySqlPath = @"C:\Program Files\MySQL\MySQL Server 5.5\bin",
 					Patches = new DimFolder()
 					{
-						Path = "\\dim-patches",
+						Path = @"\dim\patches",
 						RunKind = RunKind.RunOnce
 					},
 					Routines = new DimFolder()
 					{
-						Path = "\\dim-routines",
+						Path = @"\dim\routines",
 						RunKind = RunKind.RunIfChanged
 					},
 					Baseline = new DimFolder()
 					{
-						Path = "\\dim-baseline",
+						Path = @"\dim\baseline",
 						RunKind = RunKind.None
 					}
 				};
@@ -86,18 +87,15 @@ namespace Dim.Commands
 //				config.CustomFolders.Add(viewsFolder);
 //				config.CustomFolders.Add(lookupFolder);
 				
-				Config.Local.SaveConfig(config);
+				Local.SaveConfig(config);
 				
-				DimConsole.WriteLine("New config file created.", Settings.LocalDimConfig);
+				DimConsole.WriteLine("New config file created.", Local.LocalDimConfig);
 			}
 			
-			var loadDimDir = Settings.LocalDimDirectory;
+			var loadDimDir = Local.LocalDimDirectory;
 			DimConsole.WriteInfoLine("Tell your version control software to ignore the .dim directory.");
-			var loadLocalBackup = Settings.LocalBackupsDir;
-			var loadLocalUpdate = Settings.LocalPatchesDir;
-			var loadUpdates = Settings.SharedPatchesDir;
-			var loadRoutinesDir = Settings.SharedRoutinesDir;
-			var loadBaselineDir = Settings.SharedBaselineDir;
+			var loadLocalBackup = Local.LocalBackupsDir;
+			var loadLocalUpdate = Local.LocalPatchesDir;
 			
 			DimConsole.WriteLine("New project initialised!");
 			

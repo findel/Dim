@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Dim.Config;
 using Dim.Database;
 using Dim.Scripts;
 
@@ -18,18 +19,23 @@ namespace Dim.Commands
 			base.HasOption("e|execute",
 			               "Execute the existing baseline script. This will replace any existing database.",
 			               x => this.IsExecuting = true);
+			
 		}
 		
 		private bool IsSaving { get; set; }
 		private bool IsExecuting { get; set; }
 		
-		private string structureFileName = Config.Settings.SharedBaselineDir + "\\structure.sql";
-		private string dataFileName = Config.Settings.SharedBaselineDir + "\\data.sql";
-		private string routinesFileName = Config.Settings.SharedRoutinesDir + "\\routines.sql";
+		private string structureFileName;
+		private string dataFileName;
+		private string routinesFileName;
 		
 		public override int Run(string[] remainingArguments)
 		{
 			if(!Program.IsCorrectlySetup) return 0;
+			
+			this.structureFileName = Local.ConfigFile.Baseline.GetFullPath() + "\\structure.sql";
+			this.dataFileName = Local.ConfigFile.Baseline.GetFullPath()  + "\\data.sql";
+			this.routinesFileName = Local.ConfigFile.Routines.GetFullPath()  + "\\routines.sql";
 			
 			if(this.IsSaving)
 			{

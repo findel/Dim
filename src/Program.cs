@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using Dim.Config;
 using Dim.Database;
 using ManyConsole;
 
@@ -23,7 +25,7 @@ namespace Dim
 			{
 				bool correct = true;
 				
-				if(!Config.Local.LocalConfigExists)
+				if(!Local.LocalConfigExists)
 				{
 					DimConsole.WriteIntro("DIM project not found!");
 					DimConsole.WriteInfoLine("This directory is not setup correctly for Dim. The config file is missing.");
@@ -34,7 +36,7 @@ namespace Dim
 				{
 					try
 					{
-						var config = Config.Local.ConfigFile;
+						var config = Local.ConfigFile;
 					}
 					catch (Exception ex)
 					{

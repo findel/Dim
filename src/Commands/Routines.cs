@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Dim.Config;
 using Dim.Database;
 using Dim.Scripts;
 
@@ -27,7 +28,7 @@ namespace Dim.Commands
 		{
 			if(!Program.IsCorrectlySetup) return 0;
 			
-			var routinesFile = Config.Settings.SharedRoutinesDir + "\\routines.sql";
+			var routinesFile = Local.ConfigFile.Routines.GetFullPath() + "\\routines.sql";
 			
 			if(this.IsSaving)
 			{

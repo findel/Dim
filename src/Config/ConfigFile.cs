@@ -18,6 +18,8 @@ namespace Dim.Config
 		
 		public string Schema { get; set; }
 		
+		public string MySqlPath { get; set; }
+		
 		public DimFolder Patches { get; set; }
 		
 		public DimFolder Routines { get; set; }
@@ -32,8 +34,15 @@ namespace Dim.Config
 		public DimFolder(){}
 		
 		public string Path { get; set; }
-	
+		
 		public RunKind RunKind { get; set; }
+		
+		public string GetFullPath()
+		{
+			var dir = System.Environment.CurrentDirectory + this.Path;
+			Local.CreateDir(dir);
+			return dir;
+		}
 	}
 	
 	public enum RunKind

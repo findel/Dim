@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Dim.Config;
 using ManyConsole;
 
 namespace Dim.Commands
@@ -28,7 +29,7 @@ namespace Dim.Commands
 			fileName = string.Format(fileName, universalNow.ToString("yyyyMMdd"), universalNow.Ticks.ToString(), this.Desc);
 			
 			if(!base.DryRun)
-				File.Create(Config.Settings.SharedPatchesDir + @"\" + fileName);
+				File.Create(Local.ConfigFile.Patches.GetFullPath() + @"\" + fileName);
 			
 			DimConsole.WriteLine("A new file has been created for you to use. " +
 			                     "Don't edit after you have shared it with others.",

@@ -38,7 +38,7 @@ namespace Dim.Database
 			p.StartInfo.UseShellExecute = false;
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.RedirectStandardInput = true;
-			p.StartInfo.FileName = Settings.MySqlBinPath + @"\mysqldump.exe";
+			p.StartInfo.FileName = Local.ConfigFile.MySqlPath + @"\mysqldump.exe";
 			p.StartInfo.Arguments = string.Format(@"-h{0} -P{1} -u{2} -p{3} {4} {5}",
 			                                      Local.ConfigFile.Host,
 			                                      Local.ConfigFile.Port,
@@ -63,7 +63,7 @@ namespace Dim.Database
 			p.StartInfo.UseShellExecute = false;
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.RedirectStandardInput = true;
-			p.StartInfo.FileName = Settings.MySqlBinPath + "\\mysql.exe";
+			p.StartInfo.FileName = Local.ConfigFile.MySqlPath + "\\mysql.exe";
 			p.StartInfo.Arguments = string.Format("-h{0} -P{1} -u{2} -p{3} {4}",
 			                                      Local.ConfigFile.Host,
 			                                      Local.ConfigFile.Port,
@@ -86,11 +86,11 @@ namespace Dim.Database
 		public bool IsConnectionOkay()
 		{
 			string connString = string.Format("server={0};port={1};uid={2};pwd={3};database={4};",
-			                                  Config.Local.ConfigFile.Host,
-			                                  Config.Local.ConfigFile.Port,
-			                                  Config.Local.ConfigFile.Username,
-			                                  Config.Local.ConfigFile.Password,
-			                                  Config.Local.ConfigFile.Schema);
+			                                  Local.ConfigFile.Host,
+			                                  Local.ConfigFile.Port,
+			                                  Local.ConfigFile.Username,
+			                                  Local.ConfigFile.Password,
+			                                  Local.ConfigFile.Schema);
 			
 			var okay = true;
 			
