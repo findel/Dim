@@ -2,7 +2,7 @@
 using System.IO;
 using Dim.Scripts;
 
-namespace Dim
+namespace Dim.Commands
 {
 	public class Routines : DimCommand
 	{

@@ -55,22 +55,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Backup.cs" />
-    <Compile Include="Baseline.cs" />
+    <Compile Include="Commands\Backup.cs" />
+    <Compile Include="Commands\Baseline.cs" />
+    <Compile Include="Commands\DimCommand.cs" />
+    <Compile Include="Commands\Init.cs" />
+    <Compile Include="Commands\NewScript.cs" />
+    <Compile Include="Commands\Routines.cs" />
+    <Compile Include="Commands\Update.cs" />
     <Compile Include="Config\ConfigFile.cs" />
     <Compile Include="Config\Local.cs" />
     <Compile Include="DatabaseCommander.cs" />
-    <Compile Include="DimCommand.cs" />
     <Compile Include="DimConsole.cs" />
-    <Compile Include="Init.cs" />
-    <Compile Include="NewScript.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routines.cs" />
     <Compile Include="Scripts\Backups.cs" />
     <Compile Include="Scripts\Patches.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Update.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config" />
+    <Folder Include="Commands" />
     <Folder Include="Scripts" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

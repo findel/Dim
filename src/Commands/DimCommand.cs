@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using ManyConsole;
 
-namespace Dim
+namespace Dim.Commands
 {
 	public abstract class DimCommand : ConsoleCommand
 	{

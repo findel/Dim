@@ -1,7 +1,7 @@
 ﻿using System;
 using Dim.Scripts;
 
-namespace Dim
+namespace Dim.Commands
 {
 	public class Backup : DimCommand
 	{

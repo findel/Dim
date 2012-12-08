@@ -5,7 +5,7 @@ using System.Threading;
 using Dim.Config;
 using ManyConsole;
 
-namespace Dim
+namespace Dim.Commands
 {
 	public class Init : DimCommand
 	{

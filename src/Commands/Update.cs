@@ -7,7 +7,7 @@ using System.Threading;
 using Dim.Scripts;
 using ManyConsole;
 
-namespace Dim
+namespace Dim.Commands
 {
 	public class Update : DimCommand
 	{

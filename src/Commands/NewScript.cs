@@ -2,7 +2,7 @@
 using System.IO;
 using ManyConsole;
 
-namespace Dim
+namespace Dim.Commands
 {
 	public class NewScript : DimCommand
 	{

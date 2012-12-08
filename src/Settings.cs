@@ -15,21 +15,6 @@ namespace Dim
 			}
 		}
 		
-//		internal static string MySqlUserName
-//		{
-//			get { return "dim"; }
-//		}
-//		
-//		internal static string MySqlPassword
-//		{
-//			get { return "dim456"; }
-//		}
-//		
-//		internal static string MySqlSchemaName
-//		{
-//			get { return "dim-tests"; }
-//		}
-		
 		internal static string LocalDimDirectory
 		{
 			get
