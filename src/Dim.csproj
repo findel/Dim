@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ManyConsole">
-      <HintPath>packages\ManyConsole.0.4.2.12\lib\ManyConsole.dll</HintPath>
+      <HintPath>packages\ManyConsole.0.4.2.13\lib\ManyConsole.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
       <HintPath>packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
