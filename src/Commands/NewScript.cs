@@ -17,7 +17,7 @@ namespace Dim.Commands
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(!Program.IsCorrectlySetup) return 0;
+			if(!Program.IsCorrectlySetup()) return 0;
 			
 			DimConsole.WriteIntro("Creating a new file");
 			var universalNow = DateTime.Now.ToUniversalTime();

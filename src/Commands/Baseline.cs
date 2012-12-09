@@ -31,7 +31,7 @@ namespace Dim.Commands
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(!Program.IsCorrectlySetup) return 0;
+			if(!Program.IsCorrectlySetup()) return 0;
 			
 			this.structureFileName = Local.ConfigFile.Baseline.GetFullPath() + "\\structure.sql";
 			this.dataFileName = Local.ConfigFile.Baseline.GetFullPath()  + "\\data.sql";

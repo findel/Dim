@@ -26,7 +26,7 @@ namespace Dim.Commands
 		
 		public override int Run(string[] remainingArguments)
 		{
-			if(!Program.IsCorrectlySetup) return 0;
+			if(!Program.IsCorrectlySetup()) return 0;
 			
 			var routinesFile = Local.ConfigFile.Routines.GetFullPath() + "\\routines.sql";
 			

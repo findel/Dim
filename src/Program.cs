@@ -19,35 +19,35 @@ namespace Dim
 			return ConsoleCommandDispatcher.DispatchCommand(commands, args, Console.Out);
 		}
 		
-		public static bool IsCorrectlySetup
+		public static bool IsCorrectlySetup(bool checkConnection = true)
 		{
-			get
+			bool correct = true;
+			
+			if(!Local.LocalConfigExists)
 			{
-				bool correct = true;
-				
-				if(!Local.LocalConfigExists)
+				DimConsole.WriteIntro("DIM project not found!");
+				DimConsole.WriteInfoLine("This directory is not setup correctly for Dim. The config file is missing.");
+				DimConsole.WriteInfoLine("Run 'dim init' to create a new Dim project here.");
+				correct = false;
+			}
+			else
+			{
+				try
 				{
-					DimConsole.WriteIntro("DIM project not found!");
-					DimConsole.WriteInfoLine("This directory is not setup correctly for Dim. The config file is missing.");
-					DimConsole.WriteInfoLine("Run 'dim init' to create a new Dim project here.");
+					var config = Local.ConfigFile;
+				}
+				catch (Exception ex)
+				{
+					DimConsole.WriteIntro("Config could not load!");
+					DimConsole.WriteInfoLine("The config file could not be loaded.");
+					DimConsole.WriteErrorLine(ex.InnerException.GetType().ToString());
+					DimConsole.WriteErrorLine(ex.InnerException.Message);
 					correct = false;
 				}
-				else
+				
+				// Check that credentials can connect.
+				if(checkConnection)
 				{
-					try
-					{
-						var config = Local.ConfigFile;
-					}
-					catch (Exception ex)
-					{
-						DimConsole.WriteIntro("Config could not load!");
-						DimConsole.WriteInfoLine("The config file could not be loaded.");
-						DimConsole.WriteErrorLine(ex.InnerException.GetType().ToString());
-						DimConsole.WriteErrorLine(ex.InnerException.Message);
-						correct = false;
-					}
-					
-					// Check that credentials can connect.
 					using(var comm = new DatabaseCommander())
 					{
 						if(!comm.IsConnectionOkay())
@@ -59,9 +59,9 @@ namespace Dim
 						}
 					}
 				}
-				
-				return correct;
 			}
+			
+			return correct;
 		}
 		
 		private static IEnumerable<ConsoleCommand> GetCommands()

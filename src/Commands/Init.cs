@@ -44,7 +44,7 @@ namespace Dim.Commands
 		{
 			DimConsole.WriteIntro("Initialising a new Dim project.");
 			
-			if(!File.Exists(Local.LocalDimConfig))
+			if(!Local.LocalConfigExists)
 			{
 				
 				var config = new ConfigFile()

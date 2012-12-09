@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Commands\Backup.cs" />
     <Compile Include="Commands\Baseline.cs" />
+    <Compile Include="Commands\ConfigCommand.cs" />
     <Compile Include="Commands\DimCommand.cs" />
     <Compile Include="Commands\Init.cs" />
     <Compile Include="Commands\NewScript.cs" />

@@ -83,11 +83,8 @@ namespace Dim.Config
 		
 		public static void SaveConfig(ConfigFile file)
 		{
-			if(!Local.LocalConfigExists)
-			{
-				var configString = JsonConvert.SerializeObject(file, Formatting.Indented);
-				File.WriteAllText(Local.LocalDimConfig, configString);
-			}
+			var configString = JsonConvert.SerializeObject(file, Formatting.Indented);
+			File.WriteAllText(Local.LocalDimConfig, configString);
 		}
 		
 		internal static void CreateDir(string dir, FileAttributes att = FileAttributes.Directory)
