@@ -47,45 +47,14 @@ namespace Dim.Commands
 			if(!Local.LocalConfigExists)
 			{
 				
-				var config = new ConfigFile()
+				var config = new ConfigFile(defaultSettings: true)
 				{
 					Host = this.Host,
 					Port = this.Port,
 					Username = this.Username,
 					Password = this.Password,
-					Schema = this.Schema,
-					MySqlPath = @"C:\Program Files\MySQL\MySQL Server 5.5\bin",
-					Patches = new DimFolder()
-					{
-						Path = @"\dim\patches",
-						RunKind = RunKind.RunOnce
-					},
-					Routines = new DimFolder()
-					{
-						Path = @"\dim\routines",
-						RunKind = RunKind.RunIfChanged
-					},
-					Baseline = new DimFolder()
-					{
-						Path = @"\dim\baseline",
-						RunKind = RunKind.None
-					}
+					Schema = this.Schema
 				};
-				
-//				var viewsFolder = new DimFolder()
-//				{
-//					Path = "\\dim-views",
-//					RunKind = RunKind.RunAlways
-//				};
-//				
-//				var lookupFolder = new DimFolder()
-//				{
-//					Path = "\\dim-lookup",
-//					RunKind = RunKind.RunIfChanged
-//				};
-//				config.CustomFolders = new List<DimFolder>();
-//				config.CustomFolders.Add(viewsFolder);
-//				config.CustomFolders.Add(lookupFolder);
 				
 				Local.SaveConfig(config);
 				
