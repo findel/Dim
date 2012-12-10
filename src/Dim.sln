@@ -4,6 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # SharpDevelop 4.2.2.8818
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dim", "Dim.csproj", "{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}"
 EndProject
+Project("{CFEE4113-1246-4D54-95CB-156813CB8593}") = "Dim.Setup", "Dim.Setup\Dim.Setup.wixproj", "{34DF5516-F2FD-4669-9680-10B6049DDF4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -16,5 +18,9 @@ Global
 		{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}.Debug|x86.ActiveCfg = Debug|x86
 		{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}.Release|x86.Build.0 = Release|x86
 		{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}.Release|x86.ActiveCfg = Release|x86
+		{34DF5516-F2FD-4669-9680-10B6049DDF4D}.Debug|x86.Build.0 = Debug|x86
+		{34DF5516-F2FD-4669-9680-10B6049DDF4D}.Debug|x86.ActiveCfg = Debug|x86
+		{34DF5516-F2FD-4669-9680-10B6049DDF4D}.Release|x86.Build.0 = Release|x86
+		{34DF5516-F2FD-4669-9680-10B6049DDF4D}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 EndGlobal
