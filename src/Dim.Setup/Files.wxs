@@ -7,34 +7,34 @@
 					
 					<Directory Id="bin" Name="bin">
 						<Component Id="DimExe" Guid="8ADD62DC-D38B-4F4C-922C-2B860A56B301" DiskId="1">
-							<File Id="Dim.exe" Name="Dim.exe" Source="..\bin\Debug\Dim.exe" KeyPath="yes" />
+							<File Id="Dim.exe" Name="Dim.exe" Source="..\Dim\bin\Debug\Dim.exe" KeyPath="yes" />
 						</Component>
 						<Component Id="DimexeConfig" Guid="94B211EE-1101-4165-A2B1-283953878556" DiskId="1">
-							<File Id="Dim.exe.config" Name="Dim.exe.config" Source="..\bin\Debug\Dim.exe.config" KeyPath="yes" />
+							<File Id="Dim.exe.config" Name="Dim.exe.config" Source="..\Dim\bin\Debug\Dim.exe.config" KeyPath="yes" />
 						</Component>
 						<Component Id="ManyConsoleDll" Guid="5B06D0CD-C4A4-4D0C-ACE3-A91E5271F2A6" DiskId="1">
-							<File Id="ManyConsole.dll" Name="ManyConsole.dll" Source="..\bin\Debug\ManyConsole.dll" KeyPath="yes" />
+							<File Id="ManyConsole.dll" Name="ManyConsole.dll" Source="..\Dim\bin\Debug\ManyConsole.dll" KeyPath="yes" />
 						</Component>
 						<Component Id="MySqlDataDll" Guid="C93AB6EB-8A9D-43BD-9295-E87E14AD5D62" DiskId="1">
-							<File Id="MySql.Data.dll" Name="MySql.Data.dll" Source="..\bin\Debug\MySql.Data.dll" KeyPath="yes" />
+							<File Id="MySql.Data.dll" Name="MySql.Data.dll" Source="..\Dim\bin\Debug\MySql.Data.dll" KeyPath="yes" />
 						</Component>
 						<Component Id="NDeskOptionsDll" Guid="D792731D-14A4-4FE4-9609-EE7F4526EC92" DiskId="1">
-							<File Id="NDesk.Options.dll" Name="NDesk.Options.dll" Source="..\bin\Debug\NDesk.Options.dll" KeyPath="yes" />
+							<File Id="NDesk.Options.dll" Name="NDesk.Options.dll" Source="..\Dim\bin\Debug\NDesk.Options.dll" KeyPath="yes" />
 						</Component>
 						<Component Id="NewtonsoftJsonDll" Guid="015D97F0-751E-4BB4-8E2B-EA51342B094F" DiskId="1">
-							<File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="..\bin\Debug\Newtonsoft.Json.dll" KeyPath="yes" />
+							<File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="..\Dim\bin\Debug\Newtonsoft.Json.dll" KeyPath="yes" />
 						</Component>
 						<Component Id="NewtonsoftJsonXml" Guid="BCDED650-84F0-4298-8E6F-E41DB1FA4C69" DiskId="1">
-							<File Id="Newtonsoft.Json.xml" Name="Newtonsoft.Json.xml" Source="..\bin\Debug\Newtonsoft.Json.xml" KeyPath="yes" />
+							<File Id="Newtonsoft.Json.xml" Name="Newtonsoft.Json.xml" Source="..\Dim\bin\Debug\Newtonsoft.Json.xml" KeyPath="yes" />
 						</Component>
 						<Component Id="SimpleDataAdoDll" Guid="6DA3C9E8-366B-4911-998F-BE7913CC88BD" DiskId="1">
-							<File Id="Simple.Data.Ado.dll" Name="Simple.Data.Ado.dll" Source="..\bin\Debug\Simple.Data.Ado.dll" KeyPath="yes" />
+							<File Id="Simple.Data.Ado.dll" Name="Simple.Data.Ado.dll" Source="..\Dim\bin\Debug\Simple.Data.Ado.dll" KeyPath="yes" />
 						</Component>
 						<Component Id="SimpleDataDll" Guid="EF0C8F42-32FF-49A9-A7C3-976B640AF045" DiskId="1">
-							<File Id="Simple.Data.dll" Name="Simple.Data.dll" Source="..\bin\Debug\Simple.Data.dll" KeyPath="yes" />
+							<File Id="Simple.Data.dll" Name="Simple.Data.dll" Source="..\Dim\bin\Debug\Simple.Data.dll" KeyPath="yes" />
 						</Component>
 						<Component Id="SimpleDataMysqlMysql40Dll" Guid="826E4FC6-9639-4E33-ABBC-7BF3D51AED2A" DiskId="1">
-							<File Id="Simple.Data.Mysql.Mysql40.dll" Name="Simple.Data.Mysql.Mysql40.dll" Source="..\bin\Debug\Simple.Data.Mysql.Mysql40.dll" KeyPath="yes" />
+							<File Id="Simple.Data.Mysql.Mysql40.dll" Name="Simple.Data.Mysql.Mysql40.dll" Source="..\Dim\bin\Debug\Simple.Data.Mysql.Mysql40.dll" KeyPath="yes" />
 						</Component>
 					</Directory>
 					

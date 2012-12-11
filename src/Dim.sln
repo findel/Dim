@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 # SharpDevelop 4.2.2.8818
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dim", "Dim.csproj", "{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dim", "Dim\Dim.csproj", "{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}"
 EndProject
 Project("{CFEE4113-1246-4D54-95CB-156813CB8593}") = "Dim.Setup", "Dim.Setup\Dim.Setup.wixproj", "{34DF5516-F2FD-4669-9680-10B6049DDF4D}"
 EndProject
