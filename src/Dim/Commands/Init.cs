@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Dim.Config;
+using Dim.Database;
 using ManyConsole;
 
 namespace Dim.Commands

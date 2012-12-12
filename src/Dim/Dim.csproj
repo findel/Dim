@@ -74,6 +74,7 @@
     <Compile Include="Commands\Init.cs" />
     <Compile Include="Commands\NewScript.cs" />
     <Compile Include="Commands\Routines.cs" />
+    <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Commands\Update.cs" />
     <Compile Include="Config\ConfigFile.cs" />
     <Compile Include="Config\DimFolder.cs" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="Database\DatabaseCreateTable.txt" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+
 using Dim.Config;
 using MySql.Data.MySqlClient;
 
@@ -79,6 +81,38 @@ namespace Dim.Database
 			}
 
 			p.Close();
+		}
+		
+		public void RunInitScript()
+		{
+			var p = new Process();
+			p.StartInfo.UseShellExecute = false;
+			p.StartInfo.RedirectStandardOutput = true;
+			p.StartInfo.RedirectStandardInput = true;
+			p.StartInfo.FileName = Local.ConfigFile.MySqlPath + "\\mysql.exe";
+			p.StartInfo.Arguments = string.Format("-h{0} -P{1} -u{2} -p{3} {4}",
+			                                      Local.ConfigFile.Host,
+			                                      Local.ConfigFile.Port,
+			                                      Local.ConfigFile.Username,
+			                                      Local.ConfigFile.Password,
+			                                      Local.ConfigFile.Schema);
+			p.Start();
+			p.StandardInput.Write(GetFromResources("DatabaseCreateTable.txt"));
+			p.StandardInput.Flush();
+			p.Close();
+		}
+		
+		private static string GetFromResources(string resourceName)
+		{
+			resourceName = "Dim.Database." + resourceName;
+			Assembly assem = Assembly.GetExecutingAssembly();
+			using(Stream stream = assem.GetManifestResourceStream(resourceName))
+			{
+				using(StreamReader reader = new StreamReader(stream))
+				{
+					return reader.ReadToEnd();
+				}
+			}
 		}
 		
 		#endregion
