@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Dim
 {
@@ -30,12 +31,25 @@ namespace Dim
 			Console.WriteLine("#");
 		}
 		
-		public static void WriteInfoLine(string line1)
+		public static void WriteInfoLine(string line1, string line2 = "", string line3 = "")
 		{
-			Console.Write("#    ");
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.WriteLine("* " + line1);
-			Console.ResetColor();
+			var lines = new List<string>();
+			lines.Add(line1);
+			
+			if(!string.IsNullOrEmpty(line2))
+				lines.Add(line2);
+			
+			if(!string.IsNullOrEmpty(line3))
+				lines.Add(line3);
+			
+			foreach (var line in lines)
+			{
+				Console.Write("#  ");
+				Console.ForegroundColor = ConsoleColor.Yellow;
+				Console.WriteLine("* " + line);
+				Console.ResetColor();
+			}
+			
 			Console.WriteLine("#");
 		}
 		

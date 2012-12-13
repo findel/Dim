@@ -22,6 +22,17 @@ namespace Dim.Commands
 			
 			DimConsole.WriteIntro("Update the local database");
 			
+			// Check for the dim_log
+			using(var commander = new Database.DatabaseCommander())
+			{
+				if(!commander.DimLogExists())
+				{
+					DimConsole.WriteInfoLine("Required dim_log table doesn't exist.", "Creating empty table.");
+					if(!base.DryRun) commander.RunCreateDimLog();
+					DimConsole.WriteInfoLine("New dim_log table created.");
+				}
+			}
+			
 			var newPatchFiles = Patches.GetNewPatches();
 			
 			if(newPatchFiles.Count > 0)

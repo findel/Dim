@@ -14,7 +14,7 @@ namespace Dim.Scripts
 		{
 			var newPatches = (from f in Directory.GetFiles(Local.ConfigFile.Patches.GetFullPath())
 			                  where Path.GetExtension(f).ToLower() == ".sql"
-			                  && !File.Exists(Local.ConfigFile.Patches.GetFullPath() + @"\" + Path.GetFileName(f))
+			                  && !File.Exists(Local.LocalPatchesDir + @"\" + Path.GetFileName(f))
 			                  select f).ToList();
 			return newPatches;
 		}
@@ -22,7 +22,7 @@ namespace Dim.Scripts
 		public static void RegisterPatchCompleted(string patchFilePath)
 		{
 			//File.Copy(patchFilePath, Settings.LocalPatchesDir + "\\" + fileName);
-			File.Create(Local.ConfigFile.Patches.GetFullPath() + "\\" + Path.GetFileName(patchFilePath));
+			File.Create(Local.LocalPatchesDir + "\\" + Path.GetFileName(patchFilePath));
 		}
 		
 		public static void ExecuteNewPatches(bool dryRun, Action<string> callBeforeExecute = null)
