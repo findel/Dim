@@ -14,7 +14,8 @@ namespace Dim.Config
 			get
 			{
 				var dir = System.Environment.CurrentDirectory + @"\.dim";
-				CreateDir(dir, FileAttributes.Directory | FileAttributes.Hidden);
+				if(CreateDir(dir, FileAttributes.Directory | FileAttributes.Hidden))
+					DimConsole.WriteInfoLine("Tell your version control software to ignore the .dim directory.");
 				return dir;
 			}
 		}
@@ -87,14 +88,17 @@ namespace Dim.Config
 			File.WriteAllText(Local.LocalDimConfig, configString);
 		}
 		
-		internal static void CreateDir(string dir, FileAttributes att = FileAttributes.Directory)
+		internal static bool CreateDir(string dir, FileAttributes att = FileAttributes.Directory)
 		{
 			if(!Directory.Exists(dir))
 			{
 				var dirInfo = Directory.CreateDirectory(dir);
 				dirInfo.Attributes = att;
 				DimConsole.WriteInfoLine("New directory created: " + dir.Replace(System.Environment.CurrentDirectory, ""));
+				return true;
 			}
+			else
+				return false;
 		}
 		
 	}

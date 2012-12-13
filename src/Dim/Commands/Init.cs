@@ -47,7 +47,6 @@ namespace Dim.Commands
 			
 			if(!Local.LocalConfigExists)
 			{
-				
 				var config = new ConfigFile(defaultSettings: true)
 				{
 					Host = this.Host,
@@ -56,18 +55,11 @@ namespace Dim.Commands
 					Password = this.Password,
 					Schema = this.Schema
 				};
-				
-				Local.SaveConfig(config);
-				
+				if(!base.DryRun) Local.SaveConfig(config);
 				DimConsole.WriteLine("New config file created.", Local.LocalDimConfig);
 			}
 			
-			var loadDimDir = Local.LocalDimDirectory;
-			DimConsole.WriteInfoLine("Tell your version control software to ignore the .dim directory.");
-			var loadLocalBackup = Local.LocalBackupsDir;
-			var loadLocalUpdate = Local.LocalPatchesDir;
-			
-			DimConsole.WriteLine("New project initialised!");
+			DimConsole.WriteLine("New Dim project initialised!");
 			
 			return 0;
 		}
