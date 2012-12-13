@@ -22,20 +22,55 @@ namespace Dim.Commands
 			
 		}
 		
+		
+		#region Fields
+		
+		private string _StructureFileName;
+		private string _DataFileName;
+		private string _RoutinesFileName;
+		
+		#endregion
+		
+		#region Properties
+		
 		private bool IsSaving { get; set; }
 		private bool IsExecuting { get; set; }
 		
-		private string structureFileName;
-		private string dataFileName;
-		private string routinesFileName;
+		private string StructureFileName
+		{
+			get
+			{
+				if(string.IsNullOrEmpty(_StructureFileName))
+					_StructureFileName = Local.ConfigFile.Baseline.GetFullPath() + "\\structure.sql";
+				return _StructureFileName;
+			}
+		}
+		private string DataFileName
+		{ 
+			get
+			{
+				if(string.IsNullOrEmpty(_DataFileName))
+					_DataFileName = Local.ConfigFile.Baseline.GetFullPath() + "\\data.sql";
+				return _DataFileName;
+			}
+		}
+		private string RoutinesFileName
+		{
+			get
+			{
+				if(string.IsNullOrEmpty(_RoutinesFileName))
+					_RoutinesFileName = Local.ConfigFile.Routines.GetFullPath()  + "\\routines.sql";
+				return _RoutinesFileName;
+			}
+		}
+		
+		#endregion
+		
+
 		
 		public override int Run(string[] remainingArguments)
 		{
 			if(!Program.IsCorrectlySetup()) return 0;
-			
-			this.structureFileName = Local.ConfigFile.Baseline.GetFullPath() + "\\structure.sql";
-			this.dataFileName = Local.ConfigFile.Baseline.GetFullPath()  + "\\data.sql";
-			this.routinesFileName = Local.ConfigFile.Routines.GetFullPath()  + "\\routines.sql";
 			
 			if(this.IsSaving)
 			{
@@ -61,15 +96,15 @@ namespace Dim.Commands
 			{
 				using(var db = new DatabaseCommander())
 				{
-					db.DumpStructure(this.structureFileName);
-					db.DumpData(this.dataFileName);
-					db.DumpRoutines(this.routinesFileName);
+					db.DumpStructure(this.StructureFileName);
+					db.DumpData(this.DataFileName);
+					db.DumpRoutines(this.RoutinesFileName);
 				}
 			}
 
-			DimConsole.WriteLine("Structure file:", this.structureFileName);
-			DimConsole.WriteLine("Data file:", this.dataFileName);
-			DimConsole.WriteLine("Routines file:", this.routinesFileName);
+			DimConsole.WriteLine("Structure file:", this.StructureFileName);
+			DimConsole.WriteLine("Data file:", this.DataFileName);
+			DimConsole.WriteLine("Routines file:", this.RoutinesFileName);
 			
 			DimConsole.WriteLine("Saved! Now you can share changes with others.");
 		}
@@ -77,7 +112,7 @@ namespace Dim.Commands
 		private void Execute()
 		{
 			DimConsole.WriteIntro("Executing the current baseline script.");
-			if(File.Exists(this.structureFileName) && File.Exists(this.dataFileName) && File.Exists(this.routinesFileName))
+			if(File.Exists(this.StructureFileName) && File.Exists(this.DataFileName) && File.Exists(this.RoutinesFileName))
 			{
 				
 				DimConsole.WriteLine("Backing up existing database first.");
@@ -90,9 +125,9 @@ namespace Dim.Commands
 				{
 					using(var db = new DatabaseCommander())
 					{
-						db.RunFile(this.structureFileName);
-						db.RunFile(this.dataFileName);
-						db.RunFile(this.routinesFileName);
+						db.RunFile(this.StructureFileName);
+						db.RunFile(this.DataFileName);
+						db.RunFile(this.RoutinesFileName);
 					}
 				}
 
