@@ -138,7 +138,7 @@ namespace Dim
 			Console.SetCursorPosition(Console.CursorLeft - 15, Console.CursorTop);
 		}
 		
-		public static void StopSpiner()
+		public static void RemoveLoader()
 		{
 			Console.Write("               ");
 			Console.SetCursorPosition(Console.CursorLeft - 15, Console.CursorTop);

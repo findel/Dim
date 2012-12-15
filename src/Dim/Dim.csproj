@@ -7,8 +7,9 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Dim</RootNamespace>
     <AssemblyName>Dim</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -34,6 +35,7 @@
     <Reference Include="ManyConsole">
       <HintPath>packages\ManyConsole.0.4.2.14\lib\ManyConsole.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data">
       <HintPath>packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
@@ -86,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Backups.cs" />
     <Compile Include="Scripts\Patches.cs" />
+    <Compile Include="Scripts\DimFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

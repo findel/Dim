@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+
 using Dim.Config;
+using Dim.Scripts;
 using MySql.Data.MySqlClient;
 
 namespace Dim.Database
@@ -14,7 +17,7 @@ namespace Dim.Database
 		
 		#region Fields
 		
-		private string _MySqlConnectionString;
+		private static string _MySqlConnectionString;
 		
 		private string _MySqlCommandlineString;
 		
@@ -22,7 +25,7 @@ namespace Dim.Database
 		
 		#region Properties
 		
-		public string MySqlConnectionString
+		public static string MySqlConnectionString
 		{
 			get
 			{
@@ -52,7 +55,6 @@ namespace Dim.Database
 		}
 		
 		#endregion
-		
 		
 		#region Dump Script Methods
 		
@@ -141,7 +143,7 @@ namespace Dim.Database
 		public bool DimLogExists()
 		{
 			DataTable dataTable = new DataTable();
-			MySqlDataAdapter adapter = new MySqlDataAdapter("SHOW TABLES LIKE 'dim_log'", this.MySqlConnectionString);
+			MySqlDataAdapter adapter = new MySqlDataAdapter("SHOW TABLES LIKE 'dimfiles'", MySqlConnectionString);
 			adapter.Fill(dataTable);
 			return dataTable.Rows.Count > 0;
 		}
@@ -151,7 +153,7 @@ namespace Dim.Database
 			var okay = true;
 			try 
 			{
-				MySqlConnection conn = new MySqlConnection(this.MySqlConnectionString);
+				MySqlConnection conn = new MySqlConnection(MySqlConnectionString);
 				conn.Open();
 			}
 			catch (MySqlException ex)
@@ -160,6 +162,13 @@ namespace Dim.Database
 				this.MySqlException = ex;
 			}
 			return okay;
+		}
+		
+		public List<DimFile> GetDatabaseRecords()
+		{
+			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
+			List<DimFile> files = db.DimFiles.All();
+			return files;
 		}
 		
 		public MySqlException MySqlException { get; set; }
