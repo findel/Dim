@@ -16,17 +16,28 @@ namespace Dim.Commands
 		{
 			DimConsole.WriteIntro("Run a test");
 			
-			using(var commander = new DatabaseCommander())
+			DimConsole.WriteLine("Read from DB");
+			
+			var files = DatabaseCommander.GetAllRecords();
+			foreach (var file in files)
 			{
-				var files = commander.GetDatabaseRecords();
-				
-				
-				foreach (var file in files)
-				{
-					DimConsole.WriteInfoLine(file.FileName, file.FileHash, file.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
-				}
-				
-				
+				DimConsole.WriteInfoLine(file.FileName, file.FileHash, file.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
+			}
+			
+			DimConsole.WriteLine("Read from FS");
+			
+			var fsFiles = DimFileProcessor.GetAllFiles();
+			foreach(var file in fsFiles)
+			{
+				DimConsole.WriteInfoLine(file.FileName, file.Parent.RunKind.ToString());
+			}
+			
+			DimConsole.WriteLine("Only \"run\" files");
+			
+			var runFiles  = DimFileProcessor.GetRunFiles();
+			foreach(var file in fsFiles)
+			{
+				DimConsole.WriteInfoLine(file.FileName, file.Parent.RunKind.ToString());
 			}
 			
 			DimConsole.WriteLine("Completed test");

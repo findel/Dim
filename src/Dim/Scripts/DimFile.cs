@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.IO;
+using Dim.Config;
 
 namespace Dim.Scripts
 {
@@ -7,10 +9,18 @@ namespace Dim.Scripts
 	{
 		public DimFile(){}
 		
+		public DimFile(DimFolder folder, string fileName)
+		{
+			this.Parent = folder;
+			this.FileName = Path.GetFileName(fileName);
+		}
+		
 		public string FileName { get; set; }
 		
 		public string FileHash { get; set; }
 		
 		public DateTime Executed { get; set; }
+		
+		public DimFolder Parent { get; set; }
 	}
 }

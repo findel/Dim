@@ -164,7 +164,7 @@ namespace Dim.Database
 			return okay;
 		}
 		
-		public List<DimFile> GetDatabaseRecords()
+		public static List<DimFile> GetAllRecords()
 		{
 			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
 			List<DimFile> files = db.DimFiles.All();

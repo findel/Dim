@@ -33,7 +33,7 @@ namespace Dim.Commands
 				}
 			}
 			
-			var newPatchFiles = Patches.GetNewPatches();
+			var newPatchFiles = DimFileProcessor.GetAllFiles();
 			
 			if(newPatchFiles.Count > 0)
 			{
@@ -46,7 +46,7 @@ namespace Dim.Commands
 				for(int i = 0, l = newPatchFiles.Count; i < l; i++)
 				{
 					int count = i + 1;
-					var fileName = Path.GetFileName(newPatchFiles[i]);
+					var fileName = Path.GetFileName(newPatchFiles[i].FileName);
 					DimConsole.WriteLine(string.Format("{0}. \"{1}\"", count, fileName));
 				}
 				
@@ -58,10 +58,10 @@ namespace Dim.Commands
 				});
 				
 				// Execute all new patches
-				Patches.ExecuteNewPatches(base.DryRun, delegate(string patchFilePath)
-				{
-					DimConsole.WriteLine("Executing: \"" + Path.GetFileName(patchFilePath) + "\"");
-				});
+//				Patches.ExecuteNewPatches(base.DryRun, delegate(string patchFilePath)
+//				{
+//					DimConsole.WriteLine("Executing: \"" + Path.GetFileName(patchFilePath) + "\"");
+//				});
 				
 				DimConsole.WriteLine("Update completed.");
 			}
