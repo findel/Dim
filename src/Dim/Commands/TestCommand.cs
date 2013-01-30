@@ -16,34 +16,30 @@ namespace Dim.Commands
 		{
 			DimConsole.WriteIntro("Run a test");
 			
-			DimConsole.WriteLine("Read from DB");
-			
-			var files = DatabaseCommander.GetAllRecords();
-			foreach (var file in files)
+			var filesOnRecord = DatabaseCommander.GetAllRecords();
+			DimConsole.WriteLine("Read from DB (count: " + filesOnRecord.Count + ")");
+			foreach (var file in filesOnRecord)
 			{
-				DimConsole.WriteInfoLine(file.FileName, file.FileHash, file.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
+				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.FileHash, file.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
 			}
 			
-			DimConsole.WriteLine("Read from FS");
-			
-			var fsFiles = DimFileProcessor.GetAllFiles();
-			foreach(var file in fsFiles)
+			var filesOnSystem = DimFileProcessor.GetAllFiles();
+			DimConsole.WriteLine("Read from FS (count : " + filesOnSystem.Count + ")");
+			foreach(var file in filesOnSystem)
 			{
-				DimConsole.WriteInfoLine(file.FileName, file.Parent.RunKind.ToString());
+				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.Parent.RunKind.ToString());
 			}
 			
-			DimConsole.WriteLine("Only \"run\" files");
-			
-			var runFiles  = DimFileProcessor.GetRunFiles();
-			foreach(var file in fsFiles)
+			var filesToRun  = DimFileProcessor.GetRunFiles();
+			DimConsole.WriteLine("Only \"run\" files (count: " + filesToRun.Count + ")");
+			foreach(var file in filesToRun)
 			{
-				DimConsole.WriteInfoLine(file.FileName, file.Parent.RunKind.ToString());
+				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.Parent.RunKind.ToString());
 			}
 			
 			DimConsole.WriteLine("Completed test");
 			
 			return 0;
-			
 		}
 	}
 }
