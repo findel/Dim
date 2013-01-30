@@ -38,15 +38,24 @@ namespace Dim.Scripts
 		
 		public static List<DimFile> GetRunFiles()
 		{
-			var allFiles = GetAllFiles();
+			var filesOnSystem = GetAllFiles();
+			var fileInRecords = DatabaseCommander.GetAllRecords();
 			
-			var allRecords = DatabaseCommander.GetAllRecords();
+			// Only return files that are not already in the database records
+			List<DimFile> filesToRun = new List<DimFile>();
 			
-			var files = (from file in allFiles
-				where allRecords.Select(f => f.FileName == file.FileName).Count() == 0
-				select file).ToList();
+			// Use a loop for now, could it be improved with Linq?
+			foreach(var file in filesOnSystem)
+			{
+				if((from f in (fileInRecords) where f.FileName == file.FileName select f).Count() == 0)
+				{
+					filesToRun.Add(file);
+				}
+			}
 			
-			return files;
+			// TODO Consider not only files not foudn in the records, but their "RunKind" - We're only covering "RunOnce" at the moment.
+			
+			return filesToRun;
 		}
 		
 	}
