@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
 using Dim.Config;
 using Dim.Database;
 
@@ -56,6 +59,35 @@ namespace Dim.Scripts
 			// TODO Consider not only files not foudn in the records, but their "RunKind" - We're only covering "RunOnce" at the moment.
 			
 			return filesToRun;
+		}
+		
+		private static string GetFileContent(DimFile file)
+		{
+			string content = "";
+			using(var streamReader = new StreamReader(file.FilePath))
+			{
+				content = streamReader.ReadToEnd();
+			}
+			return content;
+		}
+		
+		public static string GetFileHash(DimFile file)
+		{
+			var fileContent = GetFileContent(file);
+			
+			// Get byte array for file contents and hash using sha1.
+			byte[] contentBytes = UTF8Encoding.UTF8.GetBytes(fileContent);
+			byte[] sha1Bytes = new SHA1Managed().ComputeHash(contentBytes);
+			
+			// Convert to hexidecimal string from sha1'd bytes.
+			var hex = "";
+			StringBuilder builder = new StringBuilder(sha1Bytes.Length * 2);
+			foreach(var b in sha1Bytes)
+				builder.Append(b.ToString("x2"));
+			hex = builder.ToString();
+			
+			// Return the hash string
+			return hex;
 		}
 		
 	}

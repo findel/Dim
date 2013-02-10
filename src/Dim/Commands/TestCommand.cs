@@ -27,14 +27,16 @@ namespace Dim.Commands
 			DimConsole.WriteLine("Read from FS (count : " + filesOnSystem.Count + ")");
 			foreach(var file in filesOnSystem)
 			{
-				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.Parent.RunKind.ToString());
+				var hash = DimFileProcessor.GetFileHash(file);
+				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.Parent.RunKind.ToString(), hash);
 			}
 			
 			var filesToRun  = DimFileProcessor.GetRunFiles();
 			DimConsole.WriteLine("Only \"run\" files (count: " + filesToRun.Count + ")");
 			foreach(var file in filesToRun)
 			{
-				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.Parent.RunKind.ToString());
+				var hash = DimFileProcessor.GetFileHash(file);
+				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.Parent.RunKind.ToString(), hash);
 			}
 			
 			DimConsole.WriteLine("Completed test");

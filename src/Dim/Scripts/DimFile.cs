@@ -22,5 +22,13 @@ namespace Dim.Scripts
 		public DateTime Executed { get; set; }
 		
 		public DimFolder Parent { get; set; }
+		
+		public string FilePath
+		{
+			get
+			{
+				return this.Parent.GetFullPath() + @"\" + this.FileName;
+			}
+		}
 	}
 }
