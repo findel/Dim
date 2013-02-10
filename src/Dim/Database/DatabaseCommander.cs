@@ -171,11 +171,16 @@ namespace Dim.Database
 			return files;
 		}
 		
-		public static DimFile GetRecordByFileName(string name)
+		public static DimFile GetRecordByFileName(string fileName)
 		{
 			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
-			DimFile file = db.DimFiles.FindByFileName(name);
+			DimFile file = db.DimFiles.FindByFileName(fileName);
 			return file;
+		}
+		
+		public static bool RecordExistsWithFileName(string fileName)
+		{
+			return GetRecordByFileName(fileName) != null;
 		}
 		
 		public MySqlException MySqlException { get; set; }

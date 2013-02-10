@@ -22,7 +22,7 @@ namespace Dim.Scripts
 			if(Local.ConfigFile.Routines != null)
 				folders.Add(Local.ConfigFile.Routines);
 			
-			if(Local.ConfigFile.CustomFolders != null 
+			if(Local.ConfigFile.CustomFolders != null
 			   && Local.ConfigFile.CustomFolders.Count > 0)
 				folders.AddRange(Local.ConfigFile.CustomFolders);
 			
@@ -31,8 +31,8 @@ namespace Dim.Scripts
 			foreach(var folder in folders)
 			{
 				files.AddRange(from f in Directory.GetFiles(folder.GetFullPath())
-				                  where Path.GetExtension(f).ToLower() == ".sql"
-				                  select new DimFile(folder, f));
+				               where Path.GetExtension(f).ToLower() == ".sql"
+				               select new DimFile(folder, f));
 			}
 			
 			return files;
@@ -42,7 +42,6 @@ namespace Dim.Scripts
 		public static List<DimFile> GetRunFiles()
 		{
 			var filesOnSystem = GetAllFiles();
-			var fileInRecords = DatabaseCommander.GetAllRecords();
 			
 			// Only return files that are not already in the database records
 			List<DimFile> filesToRun = new List<DimFile>();
@@ -50,13 +49,32 @@ namespace Dim.Scripts
 			// Use a loop for now, could it be improved with Linq?
 			foreach(var file in filesOnSystem)
 			{
-				if((from f in (fileInRecords) where f.FileName == file.FileName select f).Count() == 0)
+				switch(file.Parent.RunKind)
 				{
-					filesToRun.Add(file);
+					case RunKind.RunOnce:
+						
+						// If this file isn't in the records, then mark for run
+						if(!DatabaseCommander.RecordExistsWithFileName(file.FileName))
+							filesToRun.Add(file);
+						
+						break;
+						
+					case RunKind.RunIfChanged:
+						
+						// If this file isn't in the records, or if it has changed, then mark for run
+						var record = DatabaseCommander.GetRecordByFileName(file.FileName);
+						if(record == null || record.FileHash != GetFileHash(file))
+							filesToRun.Add(file);
+						
+						break;
+						
+					case RunKind.RunAlways:
+						
+						filesToRun.Add(file);
+						
+						break;
 				}
 			}
-			
-			// TODO Consider not only files not foudn in the records, but their "RunKind" - We're only covering "RunOnce" at the moment.
 			
 			return filesToRun;
 		}

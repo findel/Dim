@@ -39,14 +39,14 @@ namespace Dim.Commands
 				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.Parent.RunKind.ToString(), hash);
 			}
 			
-			DimConsole.WriteLine("Find file by FileName:");
-			DimConsole.WriteLine("Please enter a file name:");
-			var fileName = Console.ReadLine();
-			var testFile = DatabaseCommander.GetRecordByFileName(fileName);
-			if(testFile != null)
-				DimConsole.WriteLine("File found!", testFile.FileName, testFile.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
-			else
-				DimConsole.WriteLine("File not found :(");
+//			DimConsole.WriteLine("Find file by FileName:");
+//			DimConsole.WriteLine("Please enter a file name:");
+//			var fileName = Console.ReadLine();
+//			var testFile = DatabaseCommander.GetRecordByFileName(fileName);
+//			if(testFile != null)
+//				DimConsole.WriteLine("File found!", testFile.FileName, testFile.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
+//			else
+//				DimConsole.WriteLine("File not found :(");
 			
 			DimConsole.WriteLine("Completed test");
 			
