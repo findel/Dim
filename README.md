@@ -19,7 +19,7 @@ Available commands are:
     init        - Initialise a new Dim project
     new         - Create a new script for updating your database
     routines    - Save or execute the routines for your database
-    update      - Update your database with any changes shared by others
+    run         - Run any scripts needed to update your database
 
     help <name> - For help with one of the above commands
 ```
@@ -96,9 +96,9 @@ $ dim new --desc="update-table"
 Update your database with your new patch, or with changes shared by other developers:
 
 ```
-$ dim update
+$ dim run 
 
-#### Update the local database ####
+#### Run updates on the local database ####
 #
 #    1 new patch found.
 #    1. \dim\patches\20121213-634909582788484333-update-table.sql

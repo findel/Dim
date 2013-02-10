@@ -20,7 +20,7 @@ namespace Dim.Commands
 		{
 			if(!Program.IsCorrectlySetup()) return 0;
 			
-			DimConsole.WriteIntro("Update the local database");
+			DimConsole.WriteIntro("Run updates on the local database");
 			
 			// Check for the dimfiles
 			using(var commander = new Database.DatabaseCommander())
