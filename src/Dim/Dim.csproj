@@ -74,7 +74,7 @@
     <Compile Include="Commands\ConfigCommand.cs" />
     <Compile Include="Commands\DimCommand.cs" />
     <Compile Include="Commands\Init.cs" />
-    <Compile Include="Commands\NewScript.cs" />
+    <Compile Include="Commands\NewCommand.cs" />
     <Compile Include="Commands\Routines.cs" />
     <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Commands\RunCommand.cs" />

@@ -5,9 +5,9 @@ using ManyConsole;
 
 namespace Dim.Commands
 {
-	public class NewScript : DimCommand
+	public class NewCommand : DimCommand
 	{
-		public NewScript()
+		public NewCommand()
 		{
 			base.IsCommand("new", "Create a new script for updating your database");
 			this.HasOption("d|desc=", "desc", d => this.Desc = d);
