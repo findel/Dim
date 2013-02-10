@@ -9,9 +9,9 @@ using ManyConsole;
 
 namespace Dim.Commands
 {
-	public class Update : DimCommand
+	public class RunCommand : DimCommand
 	{
-		public Update()
+		public RunCommand()
 		{
 			base.IsCommand("run", "Run any scripts needed to update your database");
 		}
