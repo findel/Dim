@@ -33,20 +33,18 @@ namespace Dim.Commands
 				}
 			}
 			
-			var newPatchFiles = DimFileProcessor.GetAllFiles();
+			var runFiles = DimFileProcessor.GetRunFiles();
 			
-			if(newPatchFiles.Count > 0)
+			if(runFiles.Count > 0)
 			{
 				// Display count of files found.
-				DimConsole.WriteLine(string.Format("{0} new patch{1} found.",
-				                                   newPatchFiles.Count,
-				                                   (newPatchFiles.Count > 0 ? "es" : "")));
+				DimConsole.WriteLine(string.Format("{0} script(s) found that need to be executed.", runFiles.Count));
 				
 				// Display names of files found.
-				for(int i = 0, l = newPatchFiles.Count; i < l; i++)
+				for(int i = 0, l = runFiles.Count; i < l; i++)
 				{
 					int count = i + 1;
-					var fileName = Path.GetFileName(newPatchFiles[i].FileName);
+					var fileName = Path.GetFileName(runFiles[i].FileName);
 					DimConsole.WriteLine(string.Format("{0}. \"{1}\"", count, fileName));
 				}
 				
@@ -58,10 +56,19 @@ namespace Dim.Commands
 				});
 				
 				// Execute all new patches
-//				Patches.ExecuteNewPatches(base.DryRun, delegate(string patchFilePath)
-//				{
-//					DimConsole.WriteLine("Executing: \"" + Path.GetFileName(patchFilePath) + "\"");
-//				});
+				foreach (var file in runFiles)
+				{
+					DimConsole.WriteLine("Executing: \"" + Path.GetFileName(file.FileName) + "\"");
+					DimFileProcessor.ExecuteFile(file,
+					                             successCallback: delegate()
+					                             {
+					                             	DimConsole.WriteLine("Executed successfully!");
+					                             },
+					                             failureCallback: delegate(string message)
+					                             {
+					                             	DimConsole.WriteLine("Execution failed:", message);
+					                             });
+				}
 				
 				DimConsole.WriteLine("Update completed.");
 			}

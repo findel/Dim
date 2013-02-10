@@ -15,6 +15,8 @@ namespace Dim.Scripts
 			this.FileName = Path.GetFileName(fileName);
 		}
 		
+		public int Id { get; set; }
+		
 		public string FileName { get; set; }
 		
 		public string FileHash { get; set; }

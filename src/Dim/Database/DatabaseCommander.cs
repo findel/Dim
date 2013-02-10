@@ -111,7 +111,7 @@ namespace Dim.Database
 				this.Execute(GetFromResources("DatabaseCreateTable.txt"));
 		}
 		
-		private void Execute(string sql)
+		public void Execute(string sql)
 		{
 			var p = new Process();
 			p.StartInfo.UseShellExecute = false;
@@ -181,6 +181,19 @@ namespace Dim.Database
 		public static bool RecordExistsWithFileName(string fileName)
 		{
 			return GetRecordByFileName(fileName) != null;
+		}
+		
+		public static void SaveToRecord(DimFile file)
+		{
+			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
+			if(file.Id == 0)
+			{
+				db.DimFiles.Insert(file);
+			}
+			else
+			{
+				db.DimFiles.Update(file);
+			}
 		}
 		
 		public MySqlException MySqlException { get; set; }

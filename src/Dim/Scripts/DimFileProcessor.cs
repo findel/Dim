@@ -79,6 +79,39 @@ namespace Dim.Scripts
 			return filesToRun;
 		}
 		
+		public static void ExecuteFile(DimFile file, Action successCallback = null, Action<string> failureCallback = null)
+		{
+			Exception exception = null;
+			
+			try
+			{
+				using(var db = new DatabaseCommander())
+				{
+					db.Execute(GetFileContent(file));
+				}
+			}
+			catch (Exception ex)
+			{
+				exception = ex;
+			}
+			
+			if(exception == null)
+			{
+				var record = DatabaseCommander.GetRecordByFileName(file.FileName);
+				file.Id = record != null ? record.Id : 0;
+				file.FileHash = GetFileHash(file);
+				file.Executed = DateTime.Now;
+				DatabaseCommander.SaveToRecord(file);
+			}
+			
+			if(successCallback != null && exception == null)
+				successCallback();
+			
+			if(failureCallback != null && exception != null)
+				failureCallback(exception.Message);
+			
+		}
+		
 		private static string GetFileContent(DimFile file)
 		{
 			string content = "";
