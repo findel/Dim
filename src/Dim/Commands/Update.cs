@@ -13,7 +13,7 @@ namespace Dim.Commands
 	{
 		public Update()
 		{
-			base.IsCommand("update", "Update your database with any changes shared by others");
+			base.IsCommand("run", "Run any scripts needed to update your database");
 		}
 		
 		public override int Run(string[] remainingArguments)
@@ -59,7 +59,7 @@ namespace Dim.Commands
 				foreach (var file in runFiles)
 				{
 					DimConsole.WriteLine("Executing: \"" + Path.GetFileName(file.FileName) + "\"");
-					DimFileProcessor.ExecuteFile(file,
+					DimFileProcessor.ExecuteFile(file, base.DryRun,
 					                             successCallback: delegate()
 					                             {
 					                             	DimConsole.WriteLine("Executed successfully!");
