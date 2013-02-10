@@ -171,6 +171,13 @@ namespace Dim.Database
 			return files;
 		}
 		
+		public static DimFile GetRecordByFileName(string name)
+		{
+			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
+			DimFile file = db.DimFiles.FindByFileName(name);
+			return file;
+		}
+		
 		public MySqlException MySqlException { get; set; }
 		
 		void IDisposable.Dispose()
