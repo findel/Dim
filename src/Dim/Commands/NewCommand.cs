@@ -31,9 +31,10 @@ namespace Dim.Commands
 			if(!base.DryRun)
 				File.Create(Local.ConfigFile.Patches.GetFullPath() + @"\" + fileName);
 			
-			DimConsole.WriteLine("A new file has been created for you to use. " +
-			                     "Don't edit after you have shared it with others.",
+			DimConsole.WriteLine("A new file has been created for you to use. ",
 			                    fileName);
+			
+			// TODO Allow select folder, and if RunOnce then say "Don't edit after you have shared it with others."
 			
 			return 0;
 		}
