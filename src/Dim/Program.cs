@@ -12,12 +12,18 @@ namespace Dim
 	{
 		private static int Main(string[] args)
 		{
+			// Load the correct implementations for MySql. 
+			// TODO Move to a config file approach to inject these at runtime.
+			RecordRepository = new MySql.MySqlRecordRepository();
+			
 			// locate any commands in the assembly (or use an IoC container, or whatever source)
 			var commands = GetCommands();
 			
 			// run the command for the console input
 			return ConsoleCommandDispatcher.DispatchCommand(commands, args, Console.Out);
 		}
+		
+		public static IRecordRepository RecordRepository;
 		
 		public static bool IsCorrectlySetup(bool checkConnection = true)
 		{

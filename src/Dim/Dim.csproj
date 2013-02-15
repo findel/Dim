@@ -83,7 +83,10 @@
     <Compile Include="Config\Local.cs" />
     <Compile Include="Config\RunKind.cs" />
     <Compile Include="Database\DatabaseCommander.cs" />
+    <Compile Include="Database\DimRecord.cs" />
+    <Compile Include="Database\IRecordRepository.cs" />
     <Compile Include="DimConsole.cs" />
+    <Compile Include="MySql\MySqlRecordRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Backups.cs" />
@@ -100,6 +103,7 @@
     <Folder Include="Config" />
     <Folder Include="Commands" />
     <Folder Include="Database" />
+    <Folder Include="MySql" />
     <Folder Include="Scripts" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

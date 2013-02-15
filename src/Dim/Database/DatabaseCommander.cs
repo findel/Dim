@@ -164,38 +164,6 @@ namespace Dim.Database
 			return okay;
 		}
 		
-		public static List<DimFile> GetAllRecords()
-		{
-			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
-			List<DimFile> files = db.DimFiles.All();
-			return files;
-		}
-		
-		public static DimFile GetRecordByFileName(string fileName)
-		{
-			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
-			DimFile file = db.DimFiles.FindByFileName(fileName);
-			return file;
-		}
-		
-		public static bool RecordExistsWithFileName(string fileName)
-		{
-			return GetRecordByFileName(fileName) != null;
-		}
-		
-		public static void SaveToRecord(DimFile file)
-		{
-			var db = Simple.Data.Database.OpenConnection(MySqlConnectionString);
-			if(file.Id == 0)
-			{
-				db.DimFiles.Insert(file);
-			}
-			else
-			{
-				db.DimFiles.Update(file);
-			}
-		}
-		
 		public MySqlException MySqlException { get; set; }
 		
 		void IDisposable.Dispose()

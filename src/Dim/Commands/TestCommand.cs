@@ -16,11 +16,11 @@ namespace Dim.Commands
 		{
 			DimConsole.WriteIntro("Run a test");
 			
-			var filesOnRecord = DatabaseCommander.GetAllRecords();
-			DimConsole.WriteLine("Read from DB (count: " + filesOnRecord.Count + ")");
-			foreach (var file in filesOnRecord)
+			var allRecords = Program.RecordRepository.GetAll();
+			DimConsole.WriteLine("Read from DB (count: " + allRecords.Count + ")");
+			foreach (var record in allRecords)
 			{
-				DimConsole.WriteInfoLine("'" + file.FileName + "'", file.FileHash, file.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
+				DimConsole.WriteInfoLine("'" + record.FileName + "'", record.FileHash, record.Executed.ToString("dd-MMM-yyy hh:mm:ss"));
 			}
 			
 			var filesOnSystem = DimFileProcessor.GetAllFiles();

@@ -54,7 +54,7 @@ namespace Dim.Scripts
 					case RunKind.RunOnce:
 						
 						// If this file isn't in the records, then mark for run
-						if(!DatabaseCommander.RecordExistsWithFileName(file.FileName))
+						if(Program.RecordRepository.FindByFileName(file.FileName) == null)
 							filesToRun.Add(file);
 						
 						break;
@@ -62,7 +62,7 @@ namespace Dim.Scripts
 					case RunKind.RunIfChanged:
 						
 						// If this file isn't in the records, or if it has changed, then mark for run
-						var record = DatabaseCommander.GetRecordByFileName(file.FileName);
+						var record = Program.RecordRepository.FindByFileName(file.FileName);
 						if(record == null || record.FileHash != GetFileHash(file))
 							filesToRun.Add(file);
 						
@@ -99,11 +99,15 @@ namespace Dim.Scripts
 				
 				if(exception == null)
 				{
-					var record = DatabaseCommander.GetRecordByFileName(file.FileName);
-					file.Id = record != null ? record.Id : 0;
-					file.FileHash = GetFileHash(file);
-					file.Executed = DateTime.Now;
-					DatabaseCommander.SaveToRecord(file);
+					var record = Program.RecordRepository.FindByFileName(file.FileName);
+					
+					if(record == null)
+						record = new DimRecord();
+					
+					record.FileName = file.FileName;
+					record.FileHash = GetFileHash(file);
+					record.Executed =DateTime.Now;
+					Program.RecordRepository.Save(record);
 				}
 			}
 			
