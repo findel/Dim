@@ -31,7 +31,7 @@ namespace Dim.MySql
 			return record;
 		}
 		
-		public System.Collections.Generic.List<DimRecord> GetAll()
+		public List<DimRecord> GetAll()
 		{
 			List<DimRecord> records = database.DimFiles.All();
 			return records;
