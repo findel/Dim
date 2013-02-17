@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # SharpDevelop 4.2.2.8818
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dim", "Dim\Dim.csproj", "{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dim.Library", "Dim.Library\Dim.Library.csproj", "{9A4A969C-9247-45C2-BD7D-3185C9080FFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dim.MySql", "Dim.MySql\Dim.MySql.csproj", "{288C9BF9-097E-4093-BAE2-AC25489111D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -16,5 +20,13 @@ Global
 		{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}.Debug|x86.ActiveCfg = Debug|x86
 		{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}.Release|x86.Build.0 = Release|x86
 		{17F2A1F3-7A66-4F14-9A0B-BD1DD3CDE71A}.Release|x86.ActiveCfg = Release|x86
+		{9A4A969C-9247-45C2-BD7D-3185C9080FFE}.Debug|x86.Build.0 = Debug|x86
+		{9A4A969C-9247-45C2-BD7D-3185C9080FFE}.Debug|x86.ActiveCfg = Debug|x86
+		{9A4A969C-9247-45C2-BD7D-3185C9080FFE}.Release|x86.Build.0 = Release|x86
+		{9A4A969C-9247-45C2-BD7D-3185C9080FFE}.Release|x86.ActiveCfg = Release|x86
+		{288C9BF9-097E-4093-BAE2-AC25489111D7}.Debug|x86.Build.0 = Debug|x86
+		{288C9BF9-097E-4093-BAE2-AC25489111D7}.Debug|x86.ActiveCfg = Debug|x86
+		{288C9BF9-097E-4093-BAE2-AC25489111D7}.Release|x86.Build.0 = Release|x86
+		{288C9BF9-097E-4093-BAE2-AC25489111D7}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 EndGlobal
