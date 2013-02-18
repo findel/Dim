@@ -9,6 +9,9 @@ namespace Dim.Library
 {
 	public static class DimFileProcessor
 	{
+		
+		public static IRecordRepository RecordRepo;
+		
 		public static List<DimFile> GetAllFiles()
 		{
 			List<DimFolder> folders = new List<DimFolder>();
@@ -51,7 +54,7 @@ namespace Dim.Library
 					case RunKind.RunOnce:
 						
 						// If this file isn't in the records, then mark for run
-						if(Program.RecordRepository.FindByFileName(file.FileName) == null)
+						if(RecordRepo.FindByFileName(file.FileName) == null)
 							filesToRun.Add(file);
 						
 						break;
@@ -59,7 +62,7 @@ namespace Dim.Library
 					case RunKind.RunIfChanged:
 						
 						// If this file isn't in the records, or if it has changed, then mark for run
-						var record = Program.RecordRepository.FindByFileName(file.FileName);
+						var record = RecordRepo.FindByFileName(file.FileName);
 						if(record == null || record.FileHash != GetFileHash(file))
 							filesToRun.Add(file);
 						
@@ -96,7 +99,7 @@ namespace Dim.Library
 				
 				if(exception == null)
 				{
-					var record = Program.RecordRepository.FindByFileName(file.FileName);
+					var record = RecordRepo.FindByFileName(file.FileName);
 					
 					if(record == null)
 						record = new DimRecord();
@@ -104,7 +107,7 @@ namespace Dim.Library
 					record.FileName = file.FileName;
 					record.FileHash = GetFileHash(file);
 					record.Executed =DateTime.Now;
-					Program.RecordRepository.Save(record);
+					RecordRepo.Save(record);
 				}
 			}
 			

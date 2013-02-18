@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Dim.Config;
 using Dim.Database;
+using Dim.Library;
 using ManyConsole;
 
 namespace Dim
@@ -14,7 +14,7 @@ namespace Dim
 		{
 			// Load the correct implementations for MySql. 
 			// TODO Move to a config file approach to inject these at runtime.
-			RecordRepository = new MySql.MySqlRecordRepository();
+			DimFileProcessor.RecordRepo = new MySql.MySqlRecordRepository();
 			
 			// locate any commands in the assembly (or use an IoC container, or whatever source)
 			var commands = GetCommands();
@@ -22,8 +22,6 @@ namespace Dim
 			// run the command for the console input
 			return ConsoleCommandDispatcher.DispatchCommand(commands, args, Console.Out);
 		}
-		
-		public static IRecordRepository RecordRepository;
 		
 		public static bool IsCorrectlySetup(bool checkConnection = true)
 		{
