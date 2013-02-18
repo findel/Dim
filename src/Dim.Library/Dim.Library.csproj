@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -40,7 +43,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backups.cs" />
+    <Compile Include="ConfigFile.cs" />
+    <Compile Include="DimFile.cs" />
+    <Compile Include="DimFileProcessor.cs" />
+    <Compile Include="DimFolder.cs" />
+    <Compile Include="DimRecord.cs" />
+    <Compile Include="IRecordRepository.cs" />
+    <Compile Include="Local.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunKind.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>
