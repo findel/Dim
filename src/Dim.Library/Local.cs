@@ -14,8 +14,12 @@ namespace Dim.Library
 			get
 			{
 				var dir = System.Environment.CurrentDirectory + @"\.dim";
-				if(CreateDir(dir, FileAttributes.Directory | FileAttributes.Hidden))
-					DimConsole.WriteInfoLine("Tell your version control software to ignore the .dim directory.");
+				
+				CreateDir(dir, FileAttributes.Directory | FileAttributes.Hidden);
+				
+//				if(CreateDir(dir, FileAttributes.Directory | FileAttributes.Hidden))
+//					DimConsole.WriteInfoLine("Tell your version control software to ignore the .dim directory.");
+				
 				return dir;
 			}
 		}
@@ -94,7 +98,7 @@ namespace Dim.Library
 			{
 				var dirInfo = Directory.CreateDirectory(dir);
 				dirInfo.Attributes = att;
-				DimConsole.WriteInfoLine("New directory created: " + dir.Replace(System.Environment.CurrentDirectory, ""));
+				//DimConsole.WriteInfoLine("New directory created: " + dir.Replace(System.Environment.CurrentDirectory, ""));
 				return true;
 			}
 			else
