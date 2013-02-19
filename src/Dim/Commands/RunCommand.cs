@@ -4,7 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Dim.Scripts;
+
+using Dim.Library;
 using ManyConsole;
 
 namespace Dim.Commands
@@ -23,7 +24,7 @@ namespace Dim.Commands
 			DimConsole.WriteIntro("Run updates on the local database");
 			
 			// Check for the dimfiles
-			using(var commander = new Database.DatabaseCommander())
+			using(var commander = new DatabaseCommander())
 			{
 				if(!commander.DimLogExists())
 				{

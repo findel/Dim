@@ -1,9 +1,13 @@
 ﻿using System;
+using System.IO;
 
 namespace Dim.Library
 {
 	public static class Backups
 	{
+		
+		public static IDatabaseManager DatabaseManager;
+		
 		public static void SaveFile(bool dryRun, string filePath = null, Action<string> completedCallback = null)
 		{
 			
@@ -19,10 +23,7 @@ namespace Dim.Library
 			
 			if(!dryRun)
 			{
-				using(var db = new DatabaseCommander())
-				{
-					db.DumpBackup(filePath);
-				}
+				File.WriteAllText(filePath, DatabaseManager.DumpSchema());
 			}
 			
 			if(completedCallback != null)

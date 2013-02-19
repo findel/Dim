@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Dim.Config;
+using Dim.Library;
 using ManyConsole;
 
 namespace Dim.Commands

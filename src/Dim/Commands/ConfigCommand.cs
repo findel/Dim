@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
-using Dim.Config;
+
+using Dim.Library;
 
 namespace Dim.Commands
 {

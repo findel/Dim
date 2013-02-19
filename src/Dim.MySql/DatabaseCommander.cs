@@ -5,9 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-using Dim.Config;
-using Dim.Scripts;
 using MySql.Data.MySqlClient;
+using Dim.Library;
 
 namespace Dim.MySql
 {

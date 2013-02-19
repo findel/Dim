@@ -49,6 +49,7 @@
     <Compile Include="DimFileProcessor.cs" />
     <Compile Include="DimFolder.cs" />
     <Compile Include="DimRecord.cs" />
+    <Compile Include="IDatabaseManager.cs" />
     <Compile Include="IRecordRepository.cs" />
     <Compile Include="Local.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

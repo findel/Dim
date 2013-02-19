@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dim.Database;
-using Dim.Scripts;
+
+using Dim.Library;
 
 namespace Dim.Commands
 {
@@ -16,7 +16,7 @@ namespace Dim.Commands
 		{
 			DimConsole.WriteIntro("Run a test");
 			
-			var allRecords = Program.RecordRepository.GetAll();
+			var allRecords = DimFileProcessor.RecordRepo.GetAll();
 			DimConsole.WriteLine("Read from DB (count: " + allRecords.Count + ")");
 			foreach (var record in allRecords)
 			{

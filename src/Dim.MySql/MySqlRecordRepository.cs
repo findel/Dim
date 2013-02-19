@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dim.Database;
-using Dim.Config;
+using Dim.Library;
 
 namespace Dim.MySql
 {
@@ -19,7 +18,7 @@ namespace Dim.MySql
 			                                 Local.ConfigFile.Password,
 			                                 Local.ConfigFile.Schema);
 			
-			this.database = Simple.Data.Database.OpenConnection(connectionString);
+			this.database = Simple.Data.Database.OpenConnection(this.connectionString);
 		}
 		
 		private string connectionString;
@@ -27,22 +26,22 @@ namespace Dim.MySql
 		
 		public DimRecord FindByFileName(string fileName)
 		{
-			DimRecord record = database.DimFiles.FindByFileName(fileName);
+			DimRecord record = this.database.DimFiles.FindByFileName(fileName);
 			return record;
 		}
 		
 		public List<DimRecord> GetAll()
 		{
-			List<DimRecord> records = database.DimFiles.All();
+			List<DimRecord> records = this.database.DimFiles.All();
 			return records;
 		}
 		
 		public void Save(DimRecord record)
 		{
 			if(record.Id == 0)
-				database.DimFiles.Insert(record);
+				this.database.DimFiles.Insert(record);
 			else
-				database.DimFiles.Update(record);
+				this.database.DimFiles.Update(record);
 		}
 	}
 }

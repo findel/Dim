@@ -11,6 +11,7 @@ namespace Dim.Library
 	{
 		
 		public static IRecordRepository RecordRepo;
+		public static IDatabaseManager DatabaseManager;
 		
 		public static List<DimFile> GetAllFiles()
 		{
@@ -87,10 +88,7 @@ namespace Dim.Library
 			{
 				try
 				{
-					using(var db = new DatabaseCommander())
-					{
-						db.Execute(GetFileContent(file));
-					}
+					DatabaseManager.Execute(GetFileContent(file));
 				}
 				catch (Exception ex)
 				{
