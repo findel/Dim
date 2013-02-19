@@ -9,7 +9,7 @@ namespace Dim.Library
 	public static class Local
 	{
 		
-		internal static string LocalDimDirectory
+		public static string LocalDimDirectory
 		{
 			get
 			{
@@ -24,7 +24,7 @@ namespace Dim.Library
 			}
 		}
 		
-		internal static string LocalBackupsDir
+		public static string LocalBackupsDir
 		{
 			get
 			{ 
@@ -35,7 +35,7 @@ namespace Dim.Library
 		}
 		
 		// TODO Remove local patches directory - use database instead.
-		internal static string LocalPatchesDir
+		public static string LocalPatchesDir
 		{
 			get
 			{
@@ -45,7 +45,7 @@ namespace Dim.Library
 			}
 		}
 		
-		internal static string LocalDimConfig
+		public static string LocalDimConfig
 		{
 			get
 			{
