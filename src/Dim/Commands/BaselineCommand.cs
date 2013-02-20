@@ -4,9 +4,9 @@ using Dim.Library;
 
 namespace Dim.Commands
 {
-	public class Baseline : DimCommand
+	public class BaselineCommand : DimCommand
 	{
-		public Baseline()
+		public BaselineCommand()
 		{
 			base.IsCommand("baseline", "Save or execute a \"baseline\" script; used to create a database from scratch");
 			

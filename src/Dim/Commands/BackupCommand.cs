@@ -4,9 +4,9 @@ using Dim.Library;
 
 namespace Dim.Commands
 {
-	public class Backup : DimCommand
+	public class BackupCommand : DimCommand
 	{
-		public Backup()
+		public BackupCommand()
 		{
 			base.IsCommand("backup", "Do a complete backup of the database");
 			base.HasOption("f|filepath=",

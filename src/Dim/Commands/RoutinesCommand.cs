@@ -4,9 +4,9 @@ using Dim.Library;
 
 namespace Dim.Commands
 {
-	public class Routines : DimCommand
+	public class RoutinesCommand : DimCommand
 	{
-		public Routines()
+		public RoutinesCommand()
 		{
 			base.IsCommand("routines", "Save or execute the routines for your database");
 			

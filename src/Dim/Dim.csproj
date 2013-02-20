@@ -54,13 +54,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Backup.cs" />
-    <Compile Include="Commands\Baseline.cs" />
+    <Compile Include="Commands\BackupCommand.cs" />
+    <Compile Include="Commands\BaselineCommand.cs" />
     <Compile Include="Commands\ConfigCommand.cs" />
     <Compile Include="Commands\DimCommand.cs" />
-    <Compile Include="Commands\Init.cs" />
+    <Compile Include="Commands\InitCommand.cs" />
     <Compile Include="Commands\NewCommand.cs" />
-    <Compile Include="Commands\Routines.cs" />
+    <Compile Include="Commands\RoutinesCommand.cs" />
     <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Commands\RunCommand.cs" />
     <Compile Include="DimConsole.cs" />

@@ -8,9 +8,9 @@ using Dim.Library;
 
 namespace Dim.Commands
 {
-	public class Init : DimCommand
+	public class InitCommand : DimCommand
 	{
-		public Init()
+		public InitCommand()
 		{
 			base.IsCommand("init", "Initialise a new Dim project");
 			
