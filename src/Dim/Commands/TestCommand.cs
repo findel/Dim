@@ -16,7 +16,7 @@ namespace Dim.Commands
 		{
 			DimConsole.WriteIntro("Run a test");
 			
-			var allRecords = DimFileProcessor.RecordRepo.GetAll();
+			var allRecords = DatabaseProvider.RecordRepository.GetAll();
 			DimConsole.WriteLine("Read from DB (count: " + allRecords.Count + ")");
 			foreach (var record in allRecords)
 			{

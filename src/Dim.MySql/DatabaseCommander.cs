@@ -10,7 +10,7 @@ using Dim.Library;
 
 namespace Dim.MySql
 {
-	public class DatabaseCommander : IDisposable
+	public class DatabaseCommander : IDisposable, IDatabaseCommander
 	{
 		public DatabaseCommander(){}
 		
@@ -164,6 +164,14 @@ namespace Dim.MySql
 		}
 		
 		public MySqlException MySqlException { get; set; }
+		
+		public string ExceptionMessage 
+		{
+			get
+			{
+				return this.MySqlException != null ? MySqlException.Message : "";
+			}
+		}
 		
 		void IDisposable.Dispose()
 		{

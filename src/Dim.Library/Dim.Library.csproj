@@ -45,10 +45,12 @@
   <ItemGroup>
     <Compile Include="Backups.cs" />
     <Compile Include="ConfigFile.cs" />
+    <Compile Include="DatabaseProvider.cs" />
     <Compile Include="DimFile.cs" />
     <Compile Include="DimFileProcessor.cs" />
     <Compile Include="DimFolder.cs" />
     <Compile Include="DimRecord.cs" />
+    <Compile Include="IDatabaseCommander.cs" />
     <Compile Include="IDatabaseManager.cs" />
     <Compile Include="IRecordRepository.cs" />
     <Compile Include="Local.cs" />

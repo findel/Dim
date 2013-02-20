@@ -24,15 +24,15 @@ namespace Dim.Commands
 			DimConsole.WriteIntro("Run updates on the local database");
 			
 			// Check for the dimfiles
-			using(var commander = new DatabaseCommander())
-			{
-				if(!commander.DimLogExists())
+//			using(var commander = new DatabaseCommander())
+//			{
+				if(!DatabaseProvider.Commander.DimLogExists())
 				{
 					DimConsole.WriteInfoLine("Required dimfiles table doesn't exist.", "Creating empty table.");
-					if(!base.DryRun) commander.RunCreateDimLog();
+					if(!base.DryRun) DatabaseProvider.Commander.RunCreateDimLog();
 					DimConsole.WriteInfoLine("New dimfiles table created.");
 				}
-			}
+//			}
 			
 			var runFiles = DimFileProcessor.GetRunFiles();
 			

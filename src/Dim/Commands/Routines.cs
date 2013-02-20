@@ -50,10 +50,10 @@ namespace Dim.Commands
 
 			if(!this.DryRun)
 			{
-				using(var db = new DatabaseCommander())
-				{
-					db.DumpRoutines(routinesFile);
-				}
+//				using(var db = new DatabaseCommander())
+//				{
+					DatabaseProvider.Commander.DumpRoutines(routinesFile);
+//				}
 			}
 
 			DimConsole.WriteLine("Routines Saved!", routinesFile);
@@ -73,10 +73,10 @@ namespace Dim.Commands
 
 				if(!base.DryRun)
 				{
-					using(var db = new DatabaseCommander())
-					{
-						db.RunFile(routinesFile);
-					}
+//					using(var db = new DatabaseCommander())
+//					{
+						DatabaseProvider.Manager.Execute(File.ReadAllText(routinesFile));
+//					}
 				}
 
 				DimConsole.WriteLine("Routines script executed!");

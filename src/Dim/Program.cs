@@ -13,7 +13,9 @@ namespace Dim
 		{
 			// Load the correct implementations for MySql. 
 			// TODO Move to a config file approach to inject these at runtime.
-			DimFileProcessor.RecordRepo = new MySql.MySqlRecordRepository();
+			DatabaseProvider.RecordRepository = new MySql.MySqlRecordRepository();
+			DatabaseProvider.Manager = new MySql.MySqlDatabaseManager();
+			DatabaseProvider.Commander = new MySql.DatabaseCommander();
 			
 			// locate any commands in the assembly (or use an IoC container, or whatever source)
 			var commands = GetCommands();
@@ -51,16 +53,16 @@ namespace Dim
 				// Check that credentials can connect.
 				if(checkConnection)
 				{
-					using(var comm = new DatabaseCommander())
-					{
-						if(!comm.IsConnectionOkay())
+//					using(var comm = new DatabaseCommander())
+//					{
+						if(!DatabaseProvider.Commander.IsConnectionOkay())
 						{
 							DimConsole.WriteIntro("Database connection failed!");
 							DimConsole.WriteInfoLine("The database could not be connected to using the provided details.");
-							DimConsole.WriteErrorLine(comm.MySqlException.Message);
+							DimConsole.WriteErrorLine(DatabaseProvider.Commander.ExceptionMessage);
 							correct = false;
 						}
-					}
+//					}
 				}
 			}
 			

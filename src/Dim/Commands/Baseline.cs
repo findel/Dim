@@ -92,12 +92,12 @@ namespace Dim.Commands
 
 			if(!this.DryRun)
 			{
-				using(var db = new DatabaseCommander())
-				{
-					db.DumpStructure(this.StructureFileName);
-					db.DumpData(this.DataFileName);
-					db.DumpRoutines(this.RoutinesFileName);
-				}
+//				using(var db = new DatabaseCommander())
+//				{
+					DatabaseProvider.Commander.DumpStructure(this.StructureFileName);
+					DatabaseProvider.Commander.DumpData(this.DataFileName);
+					DatabaseProvider.Commander.DumpRoutines(this.RoutinesFileName);
+//				}
 			}
 
 			DimConsole.WriteLine("Structure file:", this.StructureFileName);
@@ -121,12 +121,12 @@ namespace Dim.Commands
 
 				if(!base.DryRun)
 				{
-					using(var db = new DatabaseCommander())
-					{
-						db.RunFile(this.StructureFileName);
-						db.RunFile(this.DataFileName);
-						db.RunFile(this.RoutinesFileName);
-					}
+//					using(var db = new DatabaseCommander())
+//					{
+						DatabaseProvider.Manager.Execute(File.ReadAllText(this.StructureFileName));
+						DatabaseProvider.Manager.Execute(File.ReadAllText(this.DataFileName));
+						DatabaseProvider.Manager.Execute(File.ReadAllText(this.RoutinesFileName));
+//					}
 				}
 
 				DimConsole.WriteLine("Baseline script executed!");

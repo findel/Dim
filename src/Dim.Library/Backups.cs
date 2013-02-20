@@ -6,8 +6,6 @@ namespace Dim.Library
 	public static class Backups
 	{
 		
-		public static IDatabaseManager DatabaseManager;
-		
 		public static void SaveFile(bool dryRun, string filePath = null, Action<string> completedCallback = null)
 		{
 			
@@ -23,7 +21,7 @@ namespace Dim.Library
 			
 			if(!dryRun)
 			{
-				File.WriteAllText(filePath, DatabaseManager.DumpSchema());
+				File.WriteAllText(filePath, DatabaseProvider.Manager.DumpSchema());
 			}
 			
 			if(completedCallback != null)
