@@ -40,24 +40,17 @@ namespace Dim.Commands
 			if(!Program.IsCorrectlySetup()) return 0;
 			
 			if(this.IsSaving)
-			{
 				this.Save();
-			}
 			else if(this.IsExecuting)
-			{
 				this.Execute();
-			}
 			else
-			{
-				throw new ManyConsole.ConsoleHelpAsException("Neither \"save\" or \"execute\" was chosen");
-			}
+				throw new ManyConsole.ConsoleHelpAsException("Neither \"--save\" or \"--execute\" was chosen");
 			
 			return 0;
 		}
 		
 		private void Save()
 		{
-			
 			DimConsole.WriteIntro("Saving a new baseline script.");
 
 			if(!this.DryRun)
@@ -66,7 +59,6 @@ namespace Dim.Commands
 			}
 
 			DimConsole.WriteLine("Baseline file saved! Now you can share changes with others.", this.BaselineFilePath);
-			
 		}
 		
 		private void Execute()
@@ -74,8 +66,8 @@ namespace Dim.Commands
 			DimConsole.WriteIntro("Executing the current baseline script.");
 			if(File.Exists(this.BaselineFilePath))
 			{
-				
 				DimConsole.WriteLine("Backing up existing database first.");
+				
 				Backups.SaveFile(base.DryRun, completedCallback: delegate(string filePath)
 				{
 					DimConsole.WriteLine("Backup completed:", filePath);
@@ -83,19 +75,10 @@ namespace Dim.Commands
 
 				if(!base.DryRun)
 				{
-//					using(var db = new DatabaseCommander())
-//					{
-//						DatabaseProvider.Manager.Execute(File.ReadAllText(this.StructureFileName));
-//						DatabaseProvider.Manager.Execute(File.ReadAllText(this.DataFileName));
-//						DatabaseProvider.Manager.Execute(File.ReadAllText(this.RoutinesFileName));
-//					}
 					DatabaseProvider.Manager.Execute(File.ReadAllText(this.BaselineFilePath));
 				}
 				
-				
-
 				DimConsole.WriteLine("Baseline script executed!");
-
 			}
 			else
 			{
