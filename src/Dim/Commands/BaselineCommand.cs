@@ -17,15 +17,10 @@ namespace Dim.Commands
 			base.HasOption("e|execute",
 			               "Execute the existing baseline script. This will replace any existing database.",
 			               x => this.IsExecuting = true);
-			
 		}
 		
 		
 		#region Fields
-		
-		private string _StructureFileName;
-		private string _DataFileName;
-		private string _RoutinesFileName;
 		
 		#endregion
 		
@@ -34,33 +29,7 @@ namespace Dim.Commands
 		private bool IsSaving { get; set; }
 		private bool IsExecuting { get; set; }
 		
-		private string StructureFileName
-		{
-			get
-			{
-				if(string.IsNullOrEmpty(_StructureFileName))
-					_StructureFileName = Local.ConfigFile.Baseline.GetFullPath() + "\\structure.sql";
-				return _StructureFileName;
-			}
-		}
-		private string DataFileName
-		{ 
-			get
-			{
-				if(string.IsNullOrEmpty(_DataFileName))
-					_DataFileName = Local.ConfigFile.Baseline.GetFullPath() + "\\data.sql";
-				return _DataFileName;
-			}
-		}
-		private string RoutinesFileName
-		{
-			get
-			{
-				if(string.IsNullOrEmpty(_RoutinesFileName))
-					_RoutinesFileName = Local.ConfigFile.Routines.GetFullPath()  + "\\routines.sql";
-				return _RoutinesFileName;
-			}
-		}
+		private string BaselineFilePath = Local.ConfigFile.Baseline.GetFullPath() + "\\complete.sql";
 		
 		#endregion
 		
@@ -88,29 +57,22 @@ namespace Dim.Commands
 		
 		private void Save()
 		{
+			
 			DimConsole.WriteIntro("Saving a new baseline script.");
 
 			if(!this.DryRun)
 			{
-//				using(var db = new DatabaseCommander())
-//				{
-					DatabaseProvider.Commander.DumpStructure(this.StructureFileName);
-					DatabaseProvider.Commander.DumpData(this.DataFileName);
-					DatabaseProvider.Commander.DumpRoutines(this.RoutinesFileName);
-//				}
+				File.WriteAllText(this.BaselineFilePath, DatabaseProvider.Manager.DumpSchema());
 			}
 
-			DimConsole.WriteLine("Structure file:", this.StructureFileName);
-			DimConsole.WriteLine("Data file:", this.DataFileName);
-			DimConsole.WriteLine("Routines file:", this.RoutinesFileName);
+			DimConsole.WriteLine("Baseline file saved! Now you can share changes with others.", this.BaselineFilePath);
 			
-			DimConsole.WriteLine("Saved! Now you can share changes with others.");
 		}
 		
 		private void Execute()
 		{
 			DimConsole.WriteIntro("Executing the current baseline script.");
-			if(File.Exists(this.StructureFileName) && File.Exists(this.DataFileName) && File.Exists(this.RoutinesFileName))
+			if(File.Exists(this.BaselineFilePath))
 			{
 				
 				DimConsole.WriteLine("Backing up existing database first.");
@@ -123,18 +85,21 @@ namespace Dim.Commands
 				{
 //					using(var db = new DatabaseCommander())
 //					{
-						DatabaseProvider.Manager.Execute(File.ReadAllText(this.StructureFileName));
-						DatabaseProvider.Manager.Execute(File.ReadAllText(this.DataFileName));
-						DatabaseProvider.Manager.Execute(File.ReadAllText(this.RoutinesFileName));
+//						DatabaseProvider.Manager.Execute(File.ReadAllText(this.StructureFileName));
+//						DatabaseProvider.Manager.Execute(File.ReadAllText(this.DataFileName));
+//						DatabaseProvider.Manager.Execute(File.ReadAllText(this.RoutinesFileName));
 //					}
+					DatabaseProvider.Manager.Execute(File.ReadAllText(this.BaselineFilePath));
 				}
+				
+				
 
 				DimConsole.WriteLine("Baseline script executed!");
 
 			}
 			else
 			{
-				DimConsole.WriteLine("One of the required baseline files does not exist.");
+				DimConsole.WriteLine("The baseline file does not exist.");
 			}
 		}
 		
