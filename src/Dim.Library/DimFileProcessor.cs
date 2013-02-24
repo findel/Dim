@@ -41,8 +41,10 @@ namespace Dim.Library
 		{
 			var filesOnSystem = GetAllFiles();
 			
-			// Only return files that are not already in the database records
-			List<DimFile> filesToRun = new List<DimFile>();
+			// Create three new lists, for the three different RunKind's
+			List<DimFile> newScripts = new List<DimFile>();
+			List<DimFile> changedScripts = new List<DimFile>();
+			List<DimFile> alwaysScripts = new List<DimFile>();
 			
 			// Use a loop for now, could it be improved with Linq?
 			foreach(var file in filesOnSystem)
@@ -53,7 +55,7 @@ namespace Dim.Library
 						
 						// If this file isn't in the records, then mark for run
 						if(DatabaseProvider.RecordRepository.FindByFileName(file.FileName) == null)
-							filesToRun.Add(file);
+							newScripts.Add(file);
 						
 						break;
 						
@@ -62,19 +64,28 @@ namespace Dim.Library
 						// If this file isn't in the records, or if it has changed, then mark for run
 						var record = DatabaseProvider.RecordRepository.FindByFileName(file.FileName);
 						if(record == null || record.FileHash != GetFileHash(file))
-							filesToRun.Add(file);
+							changedScripts.Add(file);
 						
 						break;
 						
 					case RunKind.RunAlways:
 						
-						filesToRun.Add(file);
+						alwaysScripts.Add(file);
 						
 						break;
 				}
 			}
 			
-			return filesToRun;
+			var allRunScripts = new List<DimFile>();
+			
+			// Run files in this order. 
+			allRunScripts.AddRange(newScripts);
+			allRunScripts.AddRange(changedScripts);
+			allRunScripts.AddRange(alwaysScripts);
+			
+			
+			
+			return allRunScripts;
 		}
 		
 		public static void ExecuteFile(DimFile file, bool dryRun, Action successCallback = null, Action<string> failureCallback = null)
