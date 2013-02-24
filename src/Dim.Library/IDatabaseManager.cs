@@ -9,5 +9,7 @@ namespace Dim.Library
 		
 		string DumpSchema();
 		
+		void CreateSchema();
+		
 	}
 }

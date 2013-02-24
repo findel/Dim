@@ -75,6 +75,7 @@ namespace Dim.Commands
 
 				if(!base.DryRun)
 				{
+					DatabaseProvider.Manager.CreateSchema();
 					DatabaseProvider.Manager.Execute(File.ReadAllText(this.BaselineFilePath));
 				}
 				
