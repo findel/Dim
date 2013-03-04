@@ -21,25 +21,16 @@ namespace Dim.Commands
 		{
 			if(!Program.IsCorrectlySetup()) return 0;
 			
-			DimConsole.WriteIntro("Run updates on the local database");
+			DimConsole.WriteIntro("Run updates on the database");
 			
-			// Check for the dimfiles
-//			using(var commander = new DatabaseCommander())
-//			{
-				if(!DatabaseProvider.Commander.DimLogExists())
-				{
-					DimConsole.WriteInfoLine("Required dimfiles table doesn't exist.", "Creating empty table.");
-					if(!base.DryRun) DatabaseProvider.Commander.RunCreateDimLog();
-					DimConsole.WriteInfoLine("New dimfiles table created.");
-				}
-//			}
+			base.CheckRecordsTableExists();
 			
 			var runFiles = DimFileProcessor.GetRunFiles();
 			
 			if(runFiles.Count > 0)
 			{
 				// Display count of files found.
-				DimConsole.WriteLine(string.Format("{0} script(s) found that need to be executed.", runFiles.Count));
+				DimConsole.WriteLine(string.Format("{0} script(s) found to be run.", runFiles.Count));
 				
 				// Display names of files found.
 				for(int i = 0, l = runFiles.Count; i < l; i++)
@@ -52,9 +43,9 @@ namespace Dim.Commands
 				// Backup before running anything (use for rollback)
 				DimConsole.WriteLine("Backing up database (local backup)");
 				Backups.SaveFile(base.DryRun, completedCallback: delegate(string fileName)
-				{
-					DimConsole.WriteLine("Completed backup:", fileName);
-				});
+				                 {
+				                 	DimConsole.WriteLine("Completed backup:", fileName);
+				                 });
 				
 				// Execute all new patches
 				foreach (var file in runFiles)
@@ -75,13 +66,11 @@ namespace Dim.Commands
 			}
 			else
 			{
-				DimConsole.WriteLine("No patch files found.");
+				DimConsole.WriteLine("No scripts found to be run.");
 			}
-			
 			
 			return 0;
 		}
-
-
+		
 	}
 }

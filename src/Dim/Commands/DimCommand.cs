@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using ManyConsole;
 
+using Dim.Library;
+
 namespace Dim.Commands
 {
 	public abstract class DimCommand : ConsoleCommand
@@ -14,6 +16,17 @@ namespace Dim.Commands
 		}
 		
 		protected bool DryRun { get; set; }
+		
+		protected void CheckRecordsTableExists()
+		{
+			// Check for the dimfiles
+			if (!DatabaseProvider.Commander.DimLogExists())
+			{
+				DimConsole.WriteInfoLine("Required dimfiles table doesn't exist.", "Creating empty table.");
+				if (!this.DryRun) DatabaseProvider.Commander.RunCreateDimLog();
+				DimConsole.WriteInfoLine("New dimfiles table created.");
+			}
+		}
 		
 	}
 }

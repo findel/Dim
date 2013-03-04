@@ -61,6 +61,7 @@
     <Compile Include="Commands\InitCommand.cs" />
     <Compile Include="Commands\NewCommand.cs" />
     <Compile Include="Commands\RoutinesCommand.cs" />
+    <Compile Include="Commands\StatusCommand.cs" />
     <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Commands\RunCommand.cs" />
     <Compile Include="DimConsole.cs" />
