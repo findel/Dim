@@ -34,17 +34,6 @@ namespace Dim.Library
 			}
 		}
 		
-		// TODO Remove local patches directory - use database instead.
-		public static string LocalPatchesDir
-		{
-			get
-			{
-				var dir = LocalDimDirectory + @"\patches";
-				CreateDir(dir);
-				return dir;
-			}
-		}
-		
 		public static string LocalDimConfig
 		{
 			get
